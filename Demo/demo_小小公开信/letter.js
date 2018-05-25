@@ -28,7 +28,6 @@ var TheLetter = function () {
 
 TheLetter.prototype ={
     init:function(){
-        
     },
 
     save:function(title,content){
