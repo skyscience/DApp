@@ -99,14 +99,24 @@
 <script>
     "use strict";
     var dappContactAddress = "n1ov7Z5oix23riQKUaVensFie5Tr5UiGmBT";
+    //直接访问星云链的API
     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
-    neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"))
+    //设置使用的网络
+    neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"))  //测试网 https://testnet.nebulas.io
 
 
+
+    // NebPay SDK 为不同平台的交易提供了统一的支付接口
+    // 开发者在Dapp页面中使用NebPay API可以通过浏览器插件钱包、手机app钱包等实现交易支付和合约调用。    
     var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
     var nebPay = new NebPay();
-    var serialNumber
+    // 执行合约返回的交易流水号，用于查询交易信息
+    var serialNumber;
 
+
+
+
+    //查询信息
     $("#search").click(function () {
         if (!$("#search_title").val()) {
             alter('搜索标题不能为空');
@@ -115,19 +125,19 @@
 
         $('#content').text("");
         var from = dappContactAddress
-        var value = "0";
-        var nonce = "0"
-        var gas_price = "1000000"
-        var gas_limit = "2000000"
-        var callFunction = "get";
+        var value = "0";  //金额
+        var nonce = "0"   //交易序号
+        var gas_price = "1000000" //手续费价格
+        var gas_limit = "2000000" //手续费限制
+        var callFunction = "get"; 
         var callArgs = "[\"" + $("#search_title").val() + "\"]";
         console.log(callArgs);
-        var contract = {
-            "function": callFunction,
-            "args": callArgs
+        var contract = { //合约
+            "function": callFunction, //方法名  
+            "args": callArgs//  参数
         }
 
-
+        //使用api.call 执行合约中的方法 
         neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
             var result = resp.result;
             
@@ -152,6 +162,10 @@
 
 
 
+
+
+
+
     $('#post').click(function () {
         if (!$("#input_title").val() || !$("#input_content").val()) {
             alert('标题或者文本不能为空');
@@ -162,7 +176,8 @@
         var callFunction = "save";
         var callArgs = "[\"" + $("#input_title").val() + "\",\"" + $("#input_content").val() + "\"]";
         console.log(callArgs);
-
+    
+        // 执行合约中的save方法
         serialNumber = nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
             listener: function (resp) {
                 console.log("thecallback is " + resp)
@@ -172,5 +187,4 @@
     })
 
 </script>
-
 </html>

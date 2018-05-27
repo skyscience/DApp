@@ -1,182 +1,138 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>test</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>星云拍卖</title>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+<link href="test/css/index.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.min.js"></script>
+<script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+<script src="https://cdn.bootcss.com/bignumber.js/7.0.1/bignumber.min.js"></script>
 
+<script src=dist/js/nebulas.js></script>
+<script src=dist/js/nebPay.js></script>
+<script src=js/config.js></script>
+<script src=js/index.js></script>
 </head>
 
-<body>
-    <script type="text/javascript" src="./dist/nebulas.js"></script>
-    <script type="text/javascript" src="./dist/nebPay.js"></script>
-    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<!-- 页头 -->
+<body class="bg-light">
+	<header>
+		<div class="navbar navbar-dark bg-dark box-shadow "
+			style="background-color: #563d7c !important;">
+			<div class="container d-flex justify-content-between">
+				<div class="col-sm-2">
+					<a href="index.html" class="navbar-brand d-flex align-items-center"
+						style="line-height: 40px;"> <i class="fas fa-share-alt fa-lg"></i><strong
+						style="display: block; padding-left: 10px;">星云拍卖</strong>
+					</a>
+				</div>
+				<div class="col-sm-10">
+					<nav
+						class="navbar navbar-expand-lg navbar-light bg-light float-right"
+						style="background-color: #563d7c !important; color: #fff;">
+						<button class="navbar-toggler float-right" type="button"
+							data-toggle="collapse" data-target="#navbarText"
+							aria-controls="navbarText" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarText">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item active"><a class="nav-link" href="index.html">首页</a></li>
+								<li class="nav-item"><a class="nav-link" href="#" onclick="publicShare();return false;">发起拍卖</a></li>
+								<li class="nav-item"><a class="nav-link" href="personal.html">个人中心</a></li>
+								<li class="nav-item"><a class="nav-link" href="about.html">关于</a></li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
 
 
 
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div style="text-align: center">
-                    <h1>test</h1>
-                </div>
-
-                <div class="container-fluid">
-                        <div class="row-fluid">
-                            <div class="span12">
-                                 <span class="label">分隔符</span>
-                                <div class="list-group">
-                                    <a class="list-group-item active">查询</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <div class="input-group col-md-3" style="margin-top:20p;margin-left:20px">
-                    <input type="text" class="form-control" placeholder="请输入名称" id=search_title />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-search" id=search>查找</button>
-
-                    </span>
-                </div>
+	<main role="main">
+		<!-- 搜索 -->
+	<div class="container-fluid tpl-banner">
+		<div class="col-sm-12">
+			<div class="col-sm-6 tpl-search-box mx-auto">
+				<div class="col-sm-10 p-0 float-left">
+					<input type="text" id="keyword" placeholder="输入关键词 快速搜索">
+				</div>
+				<div class="col-sm-2 p-0 float-right search-btn">
+					<i class="fas fa-search"></i>搜索
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-
-            </div>
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                </div>
-            </div>
-
-            <div style="text-align: center">
-                <h1 id=title></h1>
-            </div>
-
-            <div id=content style="margin-left:20px"></div>
-
-            <div id=author style="text-align: right"></div>
+ <!-- 提示 -->
+	<div class="container-fluid">
+		<div class="alert alert-warning alert-dismissible fade show mb-0 mt-3" role="alert">
+		  <strong>温馨提示!</strong> 本站部分操作需要星云钱包插件支持！插件安装请移步至 <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> 。请稍后刷新查看。
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
 
 
 
-            <div class="container-fluid">
-                    <div class="row-fluid">
-                        <div class="span12">
-                             <span class="label">分隔符</span>
-                            <div class="list-group">
-                                <a class="list-group-item active">立即发布</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+		<div class="row px-3 indexDefault">
+			<!-- 最新 -->
+			<div class="col-sm-6">
+				<div class="my-3 p-3 bg-white rounded box-shadow">
+					<h6 class="border-bottom border-gray pb-2 mb-0">最新拍卖</h6>
+					<div class="m-0 p-0 col-sm-12 newShareContainer">
+						<div class="alert alert-warning w-100 my-2 lodingdiv" role="alert">
+						  正在链上努力查询中......
+						</div>
+					</div>
+					<small class="d-block text-right mt-3"> <a href="javascript:void(0);return false;" onclick="pullRecentlyShares(this);return false;">more</a></small>
+				</div>
+			</div>
+			<!-- 热门 -->
+			<div class="col-sm-6">
+				<div class="my-3 p-3 bg-white rounded box-shadow">
+					<h6 class="border-bottom border-gray pb-2 mb-0">热门拍卖</h6>
+					<div class="m-0 p-0 col-sm-12 fireShareContainer">
+						<div class="alert alert-warning w-100 my-2 lodingdiv" role="alert">
+						  正在链上努力查询中......
+						</div>
+					</div>
+					<small class="d-block text-right mt-3"> <a href="javascript:void(0);return false;" onclick="pullFireShares(this);return false;">more</a></small>
+				</div>
+			</div>
+		</div>
 
-            <div class="input-group" style="margin-left:20px">
-                <span class="input-group-addon">标题</span>
-                <input type="text" class="form-control" placeholder="输入标题" id=input_title>
-            </div>
-            <div class="input-group" style="margin-top:20px ;margin-left:20px">
-                <span class="input-group-addon">正文</span>
-                <input type="text" class="form-control" placeholder="输入正文" id=input_content>
-            </div>
-            <div  style="text-align: right;margin-top:20px ">
-                    <button class="btn btn-info" id=post>提交</button>
-            </div>
-           
 
-        </div>
+		<!-- 查询结果 -->
+		<div class="row px-3 searchContainer" style="display:none;">
+			<div class="col-sm-12">
+				<div class="my-3 p-3 bg-white rounded box-shadow">
+					<h6 class="border-bottom border-gray pb-2 mb-0">查询结果</h6>
+					<div class="m-0 p-0 col-sm-12 searchShareContainer">
+						<div class="alert alert-warning w-100 my-2 lodingdiv" role="alert">
+						  正在链上努力查询中......
+						</div>
+					</div>
+					<small class="d-block text-right mt-3"> <a href="javascript:void(0);return false;" onclick="pullSearchShares(this);return false;">more</a></small>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+
+
+
+	
+
 </body>
-
-
-
-
-
-
-
-<script>
-    /*
-    Hash:
-    ba69321c3f4e82d065d8f5035d78ccd3694c452d5271225b5cfa33f9b05d9d13
-    我的合约：
-    n1z9cRPQQC1exruyJcmQe3hz6Fw8LXjSgx1
-    作者的合约：
-    n1ov7Z5oix23riQKUaVensFie5Tr5UiGmBT
-    */
-    "use strict";
-    var dappContactAddress = "n1z9cRPQQC1exruyJcmQe3hz6Fw8LXjSgx1";
-    var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
-    neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"))
-
-
-    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
-    var nebPay = new NebPay();
-    var serialNumber
-
-    $("#search").click(function () {
-        if (!$("#search_title").val()) {
-            alter('搜索标题不能为空');
-            return;
-        }
-
-        $('#content').text("");
-        var from = dappContactAddress
-        var value = "0";
-        var nonce = "0"
-        var gas_price = "1000000"
-        var gas_limit = "2000000"
-        var callFunction = "get";
-        var callArgs = "[\"" + $("#search_title").val() + "\"]";
-        console.log(callArgs);
-        var contract = {
-            "function": callFunction,
-            "args": callArgs
-        }
-
-
-        neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
-            var result = resp.result;
-            
-            if (result === 'null') {
-                $('#content').text("没有发现该名称，你可以立即提交！");
-                $('#title').text("");
-                $('#author').text("");
-                return;
-            }
-            console.log(result);
-            result = JSON.parse(result);
-            $("#title").text(result.title);
-            $('#content').text("内容:  " + result.content);
-            $('#author').text("作者：" + result.author);
-
-        }).catch(function (err) {
-            console.log("error :" + err.message);
-
-        })
-
-    })
-
-
-
-    $('#post').click(function () {
-        if (!$("#input_title").val() || !$("#input_content").val()) {
-            alert('标题或者文本不能为空');
-            return;
-        }
-        var to = dappContactAddress;
-        var value = "0";
-        var callFunction = "save";
-        var callArgs = "[\"" + $("#input_title").val() + "\",\"" + $("#input_content").val() + "\"]";
-        console.log(callArgs);
-
-        serialNumber = nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
-            listener: function (resp) {
-                console.log("thecallback is " + resp)
-            }
-        });
-
-    })
-
-</script>
-
 </html>

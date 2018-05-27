@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <script type="text/javascript" src="./dist/nebulas.js"></script>
+    <script type="text/javascript" src="./dist/nebPay.js"></script>
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div style="text-align: center">
+                    <h1>test</h1>
+                </div>
+
+                <div class="container-fluid">
+                        <div class="row-fluid">
+                            <div class="span12">
+                                 <span class="label">分隔符</span>
+                                <div class="list-group">
+                                    <a class="list-group-item active">查询</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="input-group col-md-3" style="margin-top:20p;margin-left:20px">
+                    <input type="text" class="form-control" placeholder="请输入名称" id=search_title />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-search" id="search">查找</button>
+
+                    </span>
+                </div>
+
+
+
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                </div>
+            </div>
+
+            <div style="text-align: center">
+                <h1 id=title></h1>
+            </div>
+
+            <div id=content style="margin-left:20px"></div>
+
+            <div id=author style="text-align: right"></div>
+
+
+
+            <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span12">
+                             <span class="label">分隔符</span>
+                            <div class="list-group">
+                                <a class="list-group-item active">立即发布</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="input-group" style="margin-left:20px">
+                <span class="input-group-addon">标题</span>
+                <input type="text" class="form-control" placeholder="输入标题" id=input_title>
+            </div>
+            <div class="input-group" style="margin-top:20px ;margin-left:20px">
+                <span class="input-group-addon">正文</span>
+                <input type="text" class="form-control" placeholder="输入正文" id=input_content>
+            </div>
+            <div  style="text-align: right;margin-top:20px ">
+                    <button class="btn btn-info" id=post>提交</button>
+            </div>
+           
+
+        </div>
+</body>
+
+
+
+
+
+
+
+<script>
+    /*
+    Hash:
+    ba69321c3f4e82d065d8f5035d78ccd3694c452d5271225b5cfa33f9b05d9d13
+    我的合约：
+    n1z9cRPQQC1exruyJcmQe3hz6Fw8LXjSgx1
+    作者的合约：
+    n1ov7Z5oix23riQKUaVensFie5Tr5UiGmBT
+    */
+ 
+    var dappContactAddress = "n1z9cRPQQC1exruyJcmQe3hz6Fw8LXjSgx1";
+     //直接访问星云链的API
+     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+    //设置使用的网络
+    neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))  //测试网 https://testnet.nebulas.io
+
+
+
+    // NebPay SDK 为不同平台的交易提供了统一的支付接口
+    // 开发者在Dapp页面中使用NebPay API可以通过浏览器插件钱包、手机app钱包等实现交易支付和合约调用。    
+    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+    var nebPay = new NebPay();
+    // 执行合约返回的交易流水号，用于查询交易信息
+    var serialNumber;
+
+
+
+
+    //查询信息
+    $("#search").click(function () {
+        if (!$("#search_title").val()) {
+            alter('搜索标题不能为空');
+            return;
+        }
+
+        $('#content').text("");
+        var from = dappContactAddress
+        var value = "0";  //金额
+        var nonce = "0"   //交易序号
+        var gas_price = "1000000" //手续费价格
+        var gas_limit = "2000000" //手续费限制
+        var callFunction = "get"; 
+        var callArgs = "[\"" + $("#search_title").val() + "\"]";
+        console.log(callArgs);
+        var contract = { //合约
+            "function": callFunction, //方法名  
+            "args": callArgs//  参数
+        }
+
+        //使用api.call 执行合约中的方法 
+        neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+            var result = resp.result;
+            
+            if (result === 'null') {
+                $('#content').text("没有发现该标题公开信，你可以立即写一篇！");
+                $('#title').text("");
+                $('#author').text("");
+                return;
+            }
+            
+            console.log(result);
+            result = JSON.parse(result);
+            $("#title").text(result.title);
+            $('#content').text("正文:  " + result.content);
+            $('#author').text("作者：" + result.author);
+
+        }).catch(function (err) {
+            console.log("error :" + err.message);
+
+        })
+
+    })
+
+
+
+
+
+
+
+    $('#post').click(function () {
+        if (!$("#input_title").val() || !$("#input_content").val()) {
+            alert('标题或者文本不能为空');
+            return;
+        }
+        var to = dappContactAddress;
+        var value = "0";
+        var callFunction = "save";
+        var callArgs = "[\"" + $("#input_title").val() + "\",\"" + $("#input_content").val() + "\"]";
+        console.log(callArgs);
+    
+        // 执行合约中的save方法
+        serialNumber = nebPay.call(to, value, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
+            listener: function (resp) {
+                console.log("thecallback is " + resp)
+            }
+        });
+
+    })
+
+</script>
+</html>

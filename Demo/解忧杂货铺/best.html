@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <!-- Generated: 2018-04-16 09:29:05 +0200 -->
+    <title>解忧杂货铺</title>
+    <!-- Dashboard Core -->
+    <link href="./assets/css/dashboard.css" rel="stylesheet" />
+</head>
+
+<body class="">
+    <div class="page">
+        <div class="page-main">
+            <div class="header py-4">
+                <div class="container">
+                    <div class="d-flex">
+                        <a class="header-brand" href="./index.html">
+                            <img src="./demo/brand/logo2.png" class="header-brand-img" alt="tabler logo">
+                        </a>
+                        <div class="d-flex order-lg-2 ml-auto">
+                            <div class="dropdown d-none d-md-flex">
+                                <div class="nav-item d-none d-md-flex">
+                                    <a href="problem.html" target="_self" class="btn btn-sm btn-outline-primary" target="_blank">提出疑问</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                            <span class="header-toggler-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 ml-auto">
+                            <form class="input-icon my-3 my-lg-0">
+                                <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">
+                                <div class="input-icon-addon">
+                                    <i class="fe fe-search"></i>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg order-lg-first">
+                            <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                                <li class="nav-item">
+                                    <a href="index.html" class="nav-link">
+                                        <i class="fe fe-home"></i> 首页</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="unResolve.html" class="nav-link">
+                                        <i class="fe fe-book"></i> 待回问题</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="already.html" class="nav-link">
+                                        <i class="fe fe-book-open"></i> 已回问题</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="best.html" class="nav-link active">
+                                        <i class="fe fe-activity"></i> 最高赞答案</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="about.html" class="nav-link">
+                                        <i class="fe fe-user"></i> 关于作者</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-3 my-md-5">
+                <div class="container" id="app" style="display: none;">
+                    <div class="row" v-for="item in infos">
+                        <div class="col-md-12 col-xl-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{item.title}}</h3>
+                                    <div class="card-options">
+                                        <!-- <a href="#" class="card-options-collapse" data-toggle="card-collapse">
+                                            <i class="fe fe-chevron-up"></i>
+                                        </a>
+                                        <a href="#" class="card-options-remove" data-toggle="card-remove">
+                                            <i class="fe fe-x"></i>
+                                        </a> -->
+                                    </div>
+                                </div>
+                                <div class="card-body" >
+                                    <div class="alert alert-secondary" role="alert">
+                                        <h4>问题详情：</h4>
+                                        <div v-html="item.content"></div>
+                                    </div>
+                                    <div class="alert alert-warning" role="alert">
+                                        <h4>回复：</h4>
+                                        <div v-html="item.reply"></div>
+                                        <div class="tags">
+                                            <span class="tag">回复于： {{item.rdate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="tags">
+                                        <span class="tag">
+                                            {{item.Praise}}
+                                            <a id="spanParise" href="#" class="tag-addon" v-on:click="Praise += 1" onclick="pariseClick(this)" :data="item.postmark">
+                                                <i class="fe fe-thumbs-up"></i>
+                                            </a>
+                                        </span>
+                                        <span class="tag">发布于： {{item.date}}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loadDiv" style="text-align: center;">
+                        <img src="demo/loading.gif" height="20px;"></img>
+                        <span> 正在加载数据...</span>
+                        <p></p>
+                    </div>
+                    <div id="loadEndDiv" style="text-align: center;display: none;">
+                        <span>没有更多数据了...</span>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div id="loadingDiv" style="text-align: center;">
+                <img src="demo/loading.gif" height="20px;"></img>
+                <span> 正在加载数据...</span>
+                <p></p>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-auto ml-lg-auto">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <ul class="list-inline list-inline-dots mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="about.html">联系作者</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="#">FAQ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-auto">
+                                <a href="problem.html" target="_self" class="btn btn-outline-primary btn-sm">提出疑问</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+                        Copyright © 2018
+                        <a href=".">解忧杂货铺</a>. Web by
+                        <a href="http://chencblog.top" target="_blank">zuiyuewentian</a> All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--操作数据 -->
+    <script type="text/javascript" src="dist/nebulas.js"></script>
+    <script type="text/javascript" src="dist/nebPay.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/createguid.js"></script>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script>
+        "use strict";
+        var commonClass = new CommonClass();
+        var dappContactAddress = commonClass.GetAddress;
+        var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+        neb.setRequest(new nebulas.HttpRequest(commonClass.GetNetName));
+        var NebPay = require("nebpay");
+        var nebPay = new NebPay();
+        var serialNumber;
+        var AllCount = 0;//总数量
+        var pageIndex = 1;//当前页
+        var pageSize = 5;//每页显示数量
+        var pageAll = 0;//总页数
+
+        window.onload = async function () {
+            loadAllCountInfo();
+        }
+
+        //初始化加载信息
+        function loadAllCountInfo() {
+            console.log("loadInfo");
+            var from = dappContactAddress;
+            var value = "0";
+            var nonce = "0";
+            var gas_price = "1000000";
+            var gas_limit = "2000000";
+            var callFunction = "sizeLength"; //所有问题数量
+            var callArgs = "";
+            var contract = {
+                "function": callFunction,
+                "args": callArgs
+            }
+
+            neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+                var result = resp.result;
+                if (result === 'null') {
+                    console.log("Null result");
+                    $("#problemNumber").text("0");
+                    AllCount = 0;
+                    return;
+                }
+                $("#problemNumber").text(result);
+                AllCount = parseInt(result);
+                loadListInfo();
+            }).catch(function (err) {
+                console.log("error :" + err.message);
+            })
+        }
+
+        //加载所有数据
+        function loadListInfo() {
+            var from = dappContactAddress;
+            var value = "0";
+            var nonce = "0";
+            var gas_price = "1000000";
+            var gas_limit = "2000000";
+            var callFunction = "GetAll";
+            console.log(AllCount);
+            if (parseInt(AllCount % pageSize) == 0) {
+                pageAll = parseInt(AllCount / pageSize);
+            } else {
+                pageAll = parseInt(AllCount / pageSize) + 1;
+            }
+            var callArgs = "[\"" + AllCount + "\",\"0\"]";
+            var contract = {
+                "function": callFunction,
+                "args": callArgs
+            }
+
+            neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+                var result = resp.result;
+                if (result === 'null') {
+                    console.log("Null result");
+                    return;
+                }
+                var result = result.replace(/\\/g, '');
+                result = result.substring(1, result.length - 1);
+                ShowDataToWeb(result);
+
+            }).catch(function (err) {
+                console.log("error :" + err.message);
+            })
+        }
+
+        //展示到页面
+        function ShowDataToWeb(result) {
+            var res = JSON.parse(result);
+            var infoData = new Array();
+
+            var index = 0;
+            for (var p in res) {
+                var content = res[p].value;
+                if (content.rauthor != null) {
+                    infoData[index] = content;
+                    if (content.Praise == "" || content.Praise == null) {
+                        content.Praise = 0;
+                    }
+                    index++;
+                }
+            }
+
+            infoData.sort(compareDesc("Praise"));
+            $("#loadDiv").hide();
+            $("#loadingDiv").hide();
+            $("#app").show();
+            new Vue({
+                el: '#app',
+                data: {
+                    infos: pagination(pageIndex, pageSize, infoData)
+                },
+                mounted: function () {
+                    //相关操作
+                },
+                created() {
+                    var _this = this;
+                    $(window).scroll(function () {
+                        let scrollTop = $(this).scrollTop()
+                        let scrollHeight = $(document).height()
+                        let windowHeight = $(this).height()
+                        if (scrollTop + windowHeight === scrollHeight) {
+                            console.log("pageIndex" + pageIndex);
+                            if (pageIndex >= pageAll) {
+                                $("#loadEndDiv").show();
+                                return;
+                            }
+                            $("#loadDiv").show();
+                            setTimeout(function () {
+                                pageIndex++;
+                                _this.infos = _this.infos.concat(pagination(pageIndex, pageSize, infoData));
+                                $("#loadDiv").hide();
+                            }, 2000);
+                        }
+                    })
+                }
+            })
+        }
+
+
+
+        //点赞
+        function pariseClick(a) {
+            var postmark = a.getAttribute('data')
+            if (!$('#spanParise').hasClass("tag-success")) {
+                // $('#spanParise').attr("tag-success");
+                $(".spanParise").removeClass("tag-addon").addClass("tag-success");
+                toParise(postmark);
+            }
+            else {
+                return;
+            }
+        }
+
+        //调用请求发布
+        function toParise(postmark) {
+            var from = dappContactAddress;
+            var value = "0";
+            var nonce = "0";
+            var gas_price = "1000000";
+            var gas_limit = "2000000";
+            var callFunction = "praiseReply";
+            var callArgs = "[\"" + postmark + "\"]";
+
+            serialNumber = nebPay.call(from, value, callFunction, callArgs, {
+                listener: function (resp) {
+                    loadInfo();
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

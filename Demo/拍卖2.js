@@ -1,4 +1,4 @@
-contract Auction{
+// contract Auction{
     event newBid();
     address owner;
     address public leader;
@@ -30,7 +30,7 @@ contract Auction{
            owner.transfer(leadingBid);
        }
    }
-}
+
 
 /*
 流程：

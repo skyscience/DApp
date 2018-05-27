@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Language" content="en" />
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#4188c9">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+  <!-- Generated: 2018-04-16 09:29:05 +0200 -->
+  <title>解忧杂货铺</title>
+
+  <!-- Dashboard Core -->
+  <link href="assets/css/dashboard.css" rel="stylesheet" />
+  <script src="ckeditor/ckeditor.js"></script>
+</head>
+
+<body class="">
+  <div class="page">
+    <div class="page-main">
+      <div class="header py-4">
+        <div class="container">
+          <div class="d-flex">
+            <a class="header-brand" href="./index.html">
+              <img src="./demo/brand/logo2.png" class="header-brand-img" alt="tabler logo">
+            </a>
+            <div class="d-flex order-lg-2 ml-auto">
+              <div class="dropdown d-none d-md-flex">
+                <div class="nav-item d-none d-md-flex">
+                  <a href="problem.html" target="_self" class="btn btn-sm btn-outline-primary" target="_blank">提出疑问</a>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+              <span class="header-toggler-icon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-3 ml-auto">
+              <form class="input-icon my-3 my-lg-0">
+                <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">
+                <div class="input-icon-addon">
+                  <i class="fe fe-search"></i>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg order-lg-first">
+              <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                <li class="nav-item">
+                  <a href="index.html" class="nav-link">
+                    <i class="fe fe-home"></i> 首页</a>
+                </li>
+                <li class="nav-item">
+                  <a href="unResolve.html" class="nav-link active">
+                    <i class="fe fe-book"></i> 待回问题</a>
+
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="already.html" class="nav-link">
+                    <i class="fe fe-book-open"></i> 已回问题</a>
+
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="best.html" class="nav-link">
+                    <i class="fe fe-activity"></i> 最高赞答案</a>
+                </li>
+                <li class="nav-item">
+                  <a href="about.html" class="nav-link">
+                    <i class="fe fe-user"></i> 关于作者</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 my-md-5">
+        <div class="container">
+          <div id="hideDiv" class="alert alert-warning alert-dismissible" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert" onclick="closeDiv()"></button>
+            <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i>
+            <a id="message">message</a>
+          </div>
+          <div id="hiderightDiv" class="alert alert-icon alert-success" role="alert" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert" onclick="closerightDiv()"></button>
+            <i class="fe fe-check mr-2" aria-hidden="true"></i>
+            <a id="rightmessage">message</a>
+          </div>
+          <div class="card">
+            <div class="card-header"  id="app">
+              <h3 class="card-title">#回复# {{title}}</h3>
+              <div class="card-options">
+                <button type="button" class="btn btn-primary" onclick="ReleaseText()">
+                  <i class="fe fe-edit-3"></i> 回复</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <textarea rows="30" cols="50" name="contentText"></textarea>
+              <script type="text/javascript">CKEDITOR.replace('contentText');</script>
+            </div>
+            <div class="card-footer"  id="foot">
+              <div class="tags">
+                <span class="tag">创建时间：{{nowdate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center flex-row-reverse">
+        <div class="col-auto ml-lg-auto">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <ul class="list-inline list-inline-dots mb-0">
+                <li class="list-inline-item">
+                  <a href="about.html">联系作者</a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">FAQ</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-auto">
+              <a href="problem.html" target="_self" class="btn btn-outline-primary btn-sm">提出疑问</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+          Copyright © 2018
+          <a href=".">解忧杂货铺</a>. Web by
+          <a href="http://chencblog.top" target="_blank">zuiyuewentian</a> All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <!--操作数据 -->
+  <script type="text/javascript" src="dist/nebulas.js"></script>
+  <script type="text/javascript" src="dist/nebPay.js"></script>
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="js/createguid.js"></script>
+  <script type="text/javascript" src="js/vue.min.js"></script>
+
+  <script>
+    "use strict";
+    var commonClass = new CommonClass();
+    var dappContactAddress = commonClass.GetAddress;
+    var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+    neb.setRequest(new nebulas.HttpRequest(commonClass.GetNetName));
+    var NebPay = require("nebpay");
+    var nebPay = new NebPay();
+    var serialNumber;
+
+    // window.onload = function () {
+    //   loadInfo();
+    // }
+    
+    loadInfo(); 
+
+    //加载所有数据
+    function loadInfo() {
+      var from = dappContactAddress;
+      var postmark = getRequest().postmark;
+      var value = "0";
+      var nonce = "0";
+      var gas_price = "1000000";
+      var gas_limit = "2000000";
+      var callFunction = "get";
+      var callArgs = "[\"" + postmark + "\"]";
+      var contract = {
+        "function": callFunction,
+        "args": callArgs
+      }
+
+      neb.api.call(from, dappContactAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+        var result = resp.result;
+        if (result === 'null') {
+          console.log("Null result");
+          return;
+        }
+        console.log(result);
+        ShowDataToWeb(result);
+      }).catch(function (err) {
+        console.log("error :" + err.message);
+      })
+    }
+
+    //展示到页面
+    function ShowDataToWeb(result) {
+      var res = JSON.parse(result);
+      new Vue({
+        el: '#app',
+        data: {
+          postmark: res.postmark,
+          title: res.title,
+          content: res.content,
+          date: res.date,
+          author: res.author,
+          anonymous: res.anonymous,
+          reply: res.reply,
+          parise: res.parise == null ? 0 : res.parise,
+          nowdate: GetNowDate()
+        }
+      })
+      new Vue({
+        el: '#foot',
+        data: {
+          postmark: res.postmark,
+          title: res.title,
+          content: res.content,
+          date: res.date,
+          author: res.author,
+          anonymous: res.anonymous,
+          reply: res.reply,
+          parise: res.parise == null ? 0 : res.parise,
+          nowdate: GetNowDate()
+        }
+      })
+    }
+
+    //回复
+    function ReleaseText() {
+      var content = CKEDITOR.instances.contentText.getData();
+      if (!content) {
+        ShowDiv("内容不能为空！");
+        return;
+      }
+      if (content.length > 10000) {
+        ShowDiv("内容字数太长！");
+        return;
+      }
+
+      Release(content);
+    }
+
+    //调用请求发布
+    function Release(content) {
+      var from = dappContactAddress;
+      var postmark = getRequest().postmark;
+      var date = GetNowDate();
+      var value = "0";
+      var nonce = "0";
+      var gas_price = "1000000";
+      var gas_limit = "2000000";
+      var callFunction = "replyLetter";
+      var callArgs = "[\"" + postmark + "\",\"" + content + "\",\"" + date + "\"]";
+
+      serialNumber = nebPay.call(from, value, callFunction, callArgs, {
+        listener: function (resp) {
+          ShowRightDiv("回复成功！");
+        }
+      });
+    }
+
+    //错误隐藏层
+    function closeDiv() {
+      $("#hideDiv").hide();
+    }
+    //错误显示层
+    function ShowDiv(content) {
+      $("#hideDiv").show();
+      $("#message").text(content);
+    }
+
+    //正确隐藏层
+    function closerightDiv() {
+      $("#hiderightDiv").hide();
+    }
+    //正确显示层
+    function ShowRightDiv(content) {
+      $("#hiderightDiv").show();
+      $("#rightmessage").text(content);
+    }
+
+
+  </script>
+</body>
+
+</html>
