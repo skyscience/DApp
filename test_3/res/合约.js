@@ -73,10 +73,10 @@ InfoContract.prototype = {
         // 使用内置对象Blockchain获取提交内容的作者钱包地址
         var from = Blockchain.transaction.from;
         // 此处调用前面定义的反序列方法parse，从存储区中读取内容
-        var existInfo = this.infoMap.get(from);
+        var existInfo = this.infoMap.get(title);
         if (existInfo) {
             throw new Error("您已经发布过内容！");
-        }
+        }  
 
         // 将数据传入 信息类
         var info = new Info();
