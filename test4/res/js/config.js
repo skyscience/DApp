@@ -1,18 +1,8 @@
 //Hash:  
-<<<<<<< HEAD
-//合约地址:   n1n5s91dTLFqfnMHuERESqXAjXwYMeTPz9r
-=======
-//合约地址:   n1hz65bwcx5dLizyKkjvFhRfSvZwdDqHTHZ
->>>>>>> dda58d35e7a6f80e0213f8e41b623b63d9495369
+//合约地址:   n1s2GVMizspKPZkQjJwwTRbhEoUVawopASk
 
 
 "use strict";
-var Info1 = function (text1) {  //定义obj1信息类
-	var jx1 = JSON.parse(text1);
-	this.author = jx1.author;  //出价的钱包
-	this.value = jx1.value;     //出价的钱
-}
-
 
 var ConstantContract = function() {
 	LocalContractStorage.defineMapProperty(this, "infoMap"); //商品信息
@@ -33,11 +23,8 @@ ConstantContract.prototype = {
     /拍卖内容或卖家联系方式/拍卖发起人钱包地址/每个历史参与出价的钱包地址/与之对应的出价金额/
     = 返回值:/是否成功发起拍卖/(当金额不足保证金时返回失败)若成功的话则保存进 bidlistmap,并且把拍卖序号的那个变量i++
 	*/
-<<<<<<< HEAD
-	savenew: function(info,time) {  //物品信息，  拍卖时间秒数， 保证金
-=======
-	savenew: function(info,time,bzz) {  //物品信息，  拍卖时间秒数， 保证金
->>>>>>> dda58d35e7a6f80e0213f8e41b623b63d9495369
+
+	savenew: function(info,time) {  //物品信息，  拍卖时间秒数
 		info = info.trim();
 		if (info === "") {
 			throw new Error("Is None !");
@@ -48,29 +35,25 @@ ConstantContract.prototype = {
 		obj.info = info;    //内容
 		obj.author = Blockchain.transaction.from; //卖家 钱包地址
 		obj.value = Blockchain.transaction.value; //获取存入智能合约代币数量
-		obj.createdDate = new Date().getTime();
-		// obj.createdDate = Blockchain.transaction.timestamp;  //创建时的 时间戳
+		//obj.createdDate = new Date().getTime();
+		obj.createdDate = Blockchain.transaction.timestamp;  //创建时的 时间戳
 		obj.end = obj.createdDate + time;
 		// obj.end = Blockchain.transaction.timestamp + time; //终止时间戳
 
 
 
 		
-<<<<<<< HEAD
 		if (obj.value >= 0.001) {
-=======
-		if (obj.value < bzz) {
->>>>>>> dda58d35e7a6f80e0213f8e41b623b63d9495369
 			throw new Error("NOT > BZZ !");//未大于保证金
 		}
 		this.list += 1;	
 		// var obj1 = new Object();  //存出价
 		// var obj2 = new Object(); //存历史
-		var obj1 = new Info1();
+		var obj1 = new Object();
 		obj1.value = 0.001;		//无人出价
 		obj1.author = '';	   //无人钱包地址;
 		this.infoMap.set(key,JSON.stringify(obj));    //保存物品信息
-		this.moneyMap.set(key,JSON.moneyMap(obj1)); //保存出价金额
+		this.moneyMap.set(key,JSON.stringify(obj1)); //保存出价金额
 	},
 	
 	
@@ -105,7 +88,7 @@ ConstantContract.prototype = {
         检查转账金额是否为0,不为零的话则转账给我们的团队账户(笑)
 	*/
 	bid: function(key1) {  // 卖家钱包地址
-		var obj1 = new Info1();
+		var obj1 = new Object();
 		obj1.value = Blockchain.transaction.value;//获取拍卖出价
 		obj1.author = Blockchain.transaction.from; //买家钱包地址;
 
