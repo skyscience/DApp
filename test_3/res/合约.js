@@ -1,7 +1,8 @@
 'use strict';
 /*
 Hash：e6dabf19bf75acd47d9b4ee922957db4d05d542cf24bdf471d3426f62b207589
-合约：n1ey8jUouBjuxkFpvbp7DR5Q8jkjFLPzkcJ
+钱包：n1ey8jUouBjuxkFpvbp7DR5Q8jkjFLPzkcJ
+标题：n1zgQZsPDXvqHXsgxoqCYrJ9LdSBAeDHjBe
 */ 
 
 // 定义信息类
@@ -48,8 +49,6 @@ var InfoContract = function () {
 
 
 
-
-
 // 定义合约的原型对象
 InfoContract.prototype = {
 // init是星云链智能合约中必须定义的方法，只在布署时执行一次
@@ -86,33 +85,25 @@ InfoContract.prototype = {
         info.author = from;
 
         // 此处调用前面定义的序列化方法stringify，将Info对象存储到存储区
-        this.infoMap.put(from, info);  //键:提交者钱包地址    值：数据
+        this.infoMap.put(title, info);  //键:标题    值：内容
     },
 
 
-    // 根据作者的钱包地址从存储区读取内容，返回Info对象
-    read : function (author) {
-        author = author.trim();
-        if (author === "") {
-            throw new Error("地址为空！");
+    // 根据标题从存储区读取内容，返回Info对象
+    read : function (title) {
+        title = title.trim();
+        if (title === "") {
+            throw new Error("未查询到该文章");
         }
-        // 验证地址
+       /* // 验证地址
         if (!this.verifyAddress(author)) {
             throw new Error("输入的地址不存在！");
-        }
-        var existInfo = this.infoMap.get(author);
+        }*/
+        var existInfo = this.infoMap.get(title);
         return existInfo;
     },
 
 
-    // 验证地址是否合法
-    verifyAddress: function (address) {
-        // 1-valid, 0-invalid
-        var result = Blockchain.verifyAddress(address);
-        return {
-            valid: result == 0 ? false : true
-        };
-    }
 };
 
 module.exports = InfoContract; // 导出代码，标示智能合约入口
