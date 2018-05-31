@@ -1,5 +1,5 @@
 //Hash:  
-//合约地址:   n1hz65bwcx5dLizyKkjvFhRfSvZwdDqHTHZ
+//合约地址:   n1n5s91dTLFqfnMHuERESqXAjXwYMeTPz9r
 
 
 "use strict";
@@ -29,7 +29,7 @@ ConstantContract.prototype = {
     /拍卖内容或卖家联系方式/拍卖发起人钱包地址/每个历史参与出价的钱包地址/与之对应的出价金额/
     = 返回值:/是否成功发起拍卖/(当金额不足保证金时返回失败)若成功的话则保存进 bidlistmap,并且把拍卖序号的那个变量i++
 	*/
-	savenew: function(info,time,bzz) {  //物品信息，  拍卖时间秒数， 保证金
+	savenew: function(info,time) {  //物品信息，  拍卖时间秒数， 保证金
 		info = info.trim();
 		if (info === "") {
 			throw new Error("Is None !");
@@ -48,7 +48,7 @@ ConstantContract.prototype = {
 
 
 		
-		if (obj.value < bzz) {
+		if (obj.value >= 0.001) {
 			throw new Error("NOT > BZZ !");//未大于保证金
 		}
 		this.list += 1;	
