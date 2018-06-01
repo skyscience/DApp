@@ -1,4 +1,8 @@
 //6/2 0:14 修正
+//0.2手续费主网TX Hash	44d07614fa94d59943097161de1aa3f1a803043e99468e5f5904ed850271a310
+//Contract address	n1mgivTPnpv82JE7oXvuVaZnarqHJuTwqmB
+//0.000002主网f4b8f6c721f96e51877942a23f419b3083b06b10a14dbcc6e9313068c445378e
+//Contract address	n1sE95n8nz8ySQzAVCMXSLo9aBUL7858rUE
 "use strict";
 
 var obj1Info = function (text) {
@@ -50,7 +54,7 @@ ConstantContract.prototype = {
 		obj.value = Blockchain.transaction.value; //获取存入智能合约代币数量
 		obj.createdDate = Blockchain.transaction.timestamp;  //创建时的 时间戳
 		obj.end = obj.createdDate + time;     //终止时间戳	
-		if (obj.value >= 0.2) {
+		if (obj.value >= 0.000002) {
 			throw new Error("NOT > BZZ !");//未大于保证金
 		}
 		this.list += 1;	
@@ -58,7 +62,7 @@ ConstantContract.prototype = {
 
 		
 		var obj1 = new obj1Info(); //历史
-		obj1.value = 0.001;		//初始化 出价
+		obj1.value = 0;		//初始化 出价
 		obj1.author = '';	   //初始化 出价钱包地址;
 		this.infoMap.put(key,JSON.stringify(obj));    //保存物品信息
 		this.moneyMap.put(key,JSON.stringify(obj1)); //保存出价金额
@@ -143,7 +147,7 @@ ConstantContract.prototype = {
 
 
 		var money = JSON.parse(this.moneyMap.get(key2).value); //获取拍卖金额
-		var bidmoney = money*0.99+0.2;// 拍卖金额*(1-手续费比例)＋保证金 
+		var bidmoney = money*0.99+0.000002;// 拍卖金额*(1-手续费比例)＋保证金 
 		var sxfmoney = money*0.01;  //拍卖金额*手续费
 		Blockchain.transfer(mjdz,bidmoney); //转给卖家
 		Blockchain.transfer('n1JJ8FKGy1kNvna4RTuQyVRcaeV5KLgD8rK',sxfmoney); //将手续费转给 我们
