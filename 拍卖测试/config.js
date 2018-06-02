@@ -1,8 +1,8 @@
-//6/2 0:14 修正
-//0.2手续费主网TX Hash	44d07614fa94d59943097161de1aa3f1a803043e99468e5f5904ed850271a310
-//Contract address	n1mgivTPnpv82JE7oXvuVaZnarqHJuTwqmB
-//0.000002主网f4b8f6c721f96e51877942a23f419b3083b06b10a14dbcc6e9313068c445378e
-//Contract address	n1sE95n8nz8ySQzAVCMXSLo9aBUL7858rUE
+//6/2 18:51 修正
+
+//[主网]  手续费: 0.000002 
+//Hash:  e9d5cccb26f9ed24007425ce2f9388315fdd4e04a184e84b172ca2ab4f97d193
+//合约:  n1pJv6t6maor5bFvSYYr17njY5PVva6P7Pd
 "use strict";
 
 var obj1Info = function (text) {
@@ -62,10 +62,13 @@ ConstantContract.prototype = {
 
 		
 		var obj1 = new obj1Info(); //历史
-		obj1.value = 0;		//初始化 出价
+		obj1.value = 0.00000001;	//初始化 出价
 		obj1.author = '';	   //初始化 出价钱包地址;
-		this.infoMap.put(key,JSON.stringify(obj));    //保存物品信息
+		obj.cjvalue = obj1.value;
+		obj.cjauthor = obj1.author;
 		this.moneyMap.put(key,JSON.stringify(obj1)); //保存出价金额
+		this.infoMap.put(key,JSON.stringify(obj));    //保存物品信息
+		
 	},
 	
 	
@@ -86,9 +89,10 @@ ConstantContract.prototype = {
 
 	//拍卖竞价
 	bid: function(key1) {  // 商品序号
+		var obj = new Object();
 		var obj1 = new obj1Info(); //历史 出价
 		var obj2 = new obj2Info(); //当前 出价
-		obj2.value = Blockchain.transaction.value;//获取拍卖出价
+		obj2.value = Blockchain.transaction.value;//获取买家出价
 		obj2.author = Blockchain.transaction.from; //买家钱包地址
 		
 
@@ -117,6 +121,10 @@ ConstantContract.prototype = {
 			throw new Error("ERROR FK!"); //退款失败
 		}
 		this.moneyMap.put(key1,obj1); //将最高价格 对应到商品key
+
+		obj.cjvalue = obj1.value;  //最高价存到 obj的当前价格中
+		obj.cjauthor = obj1.author;
+		this.infoMap.put(key1,JSON.stringify(obj));    //保存物品信息
 	},
 
 

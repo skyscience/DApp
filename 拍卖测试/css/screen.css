@@ -44,7 +44,7 @@ h6 {
   font-size: 0.75em;
 }
 a {
-  color: #e67e22;
+  
   outline: none;
 }
 a:hover {
@@ -163,7 +163,7 @@ pre {
   position: relative;
 }
 .main-navigation .menu li.nav-current {
-  border-bottom: 2px solid #e67e22;
+  /* border-bottom: 2px solid #e67e22; */
   margin-bottom: -2px;
 }
 .main-navigation .menu li a {
@@ -850,7 +850,7 @@ pre {
 }
 .copyright {
   background: #111;
-  font-size: 13px;
+  font-size: 16px;
   text-align: center;
   color: #555555;
   padding-top: 28px;
