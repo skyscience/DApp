@@ -90,8 +90,8 @@ $("#create").click(function () {
 		tempStr += '<p>商品序号</p>';
 		tempStr += '<textarea class="form-control" rows="1" id="nids" >0</textarea>';
 		tempStr += '<p>出价 (加价至少0.001)</p>';
-		tempStr += '<textarea class="form-control" rows="1" id="nids" >0</textarea>';
-		tempStr += '<button type="button" class="btn btn-primary" id="savebid" onclick="savebid();">参与拍卖</button>';
+		tempStr += '<textarea class="form-control" rows="1" id="nidsmon" >0.001</textarea>';
+		tempStr += '<button type="button" class="btn btn-primary" id="savebidbutton" onclick="savebid();">参与拍卖</button>';
 		tempStr += '</div>';
 		tempStr += '</form>';
 		tempStr += '</div> ';
@@ -107,42 +107,39 @@ $("#create").click(function () {
 
 
 //===============================================
-function save() {
+function savebid() {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
-	var content = $("#content").val();
-	var name = $("#name").val();
-	if (content == "") {
-		alert("请输入描述。");
+	
+	var nids = $("#nids").val();
+	var nidsmon = $("#nidsmon").val();
+	if (nids == "") {
+		alert("请输入序号。");
 		return;
 	}
-	if (name == "") {
-		alert("请输入持续时间 (秒)");
+	if (nidsmon == "") {
+		alert("请输入出价");
 		return;
 	}
 
-	content = content.replace(/\n/g, "<br>");
-	name = name.replace(/\n/g, "<br>");
-	var to = dappAddress;
-	var value = "0";
-	var callFunction = "savenew";
-	var callArgs = '["' + content + '",' + name + ']';
-	nebpay.call(to, value, callFunction, callArgs, {
+	nids = nids.replace(/\n/g, "<br>");
+	nidsmon = nidsmon.replace(/\n/g, "<br>");
+	nebpay.call("n1pJv6t6maor5bFvSYYr17njY5PVva6P7Pd", ""+nidsmon, "bid", "[\""+nids +"\"]",{
 		listener: function Push(resp) {
 			console.log("response of push: " + JSON.stringify(resp))
 			var respString = JSON.stringify(resp);
 			if (respString.search("rejected by user") !== -1) {
-				alert("关闭交易,取消上传")
+				alert("关闭交易,取消出价")
 			} else if (respString.search("txhash") !== -1) {
 				alert("上传Hash: " + resp.txhash + "请等待交易确认,如果上传失败请检查内容是否含有特殊字符")
 			}
 		}
-	});
+	})
 };
 
 
 
-function savebid() {
+function save() {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
 	var content = $("#content").val();
