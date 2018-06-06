@@ -1,4 +1,4 @@
-var dappAddress = "n1pJv6t6maor5bFvSYYr17njY5PVva6P7Pd";
+var dappAddress = "n1taXDgGiiQh6hyptg2aCXYRHwa7X6EX8Za";
 $(function () {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
@@ -27,6 +27,7 @@ $(function () {
 				var tempStr = "";
 
 				for (var i = 0; i < res.length; i++) {
+					cj = res[i].cjvalue / (10e17);
 					if (i % 2 == 0) {  //0 2 4 6 8
 						tempStr += '<div class="panel-body"> ';
 					} else {		//1 3 4 5 6
@@ -44,7 +45,7 @@ $(function () {
 					tempStr += '<br>';
 					tempStr += '<small><cite>' + '终止:' + ttt(res[i].end) + '</cite></small>';
 					tempStr += '<br>';
-					tempStr += '<small><cite>' + '目前出价:' + res[i].cjvalue + '</cite></small>';
+					tempStr += '<small><cite>' + '目前出价:' + cj + '</cite></small>';
 					tempStr += '</p> </div> ';
 				}
 				console.log(tempStr);
@@ -66,7 +67,7 @@ $("#create").click(function () {
 	tempStr += '<div class="form-group">';
 	tempStr += '<p>发起拍卖 保证金至少0.000002</p>';
 	tempStr += '<p>持续时间秒数</p>';
-	tempStr += '<textarea class="form-control" rows="1" id="name" >300</textarea>';
+	tempStr += '<textarea class="form-control" rows="1" id="name" >60</textarea>';
 	tempStr += '<p>Info 详细内容</p>';
 	tempStr += '<textarea class="form-control" rows="10" id="content" >将我替换详细描述</textarea>';
 	tempStr += '<button type="button" class="btn btn-primary" id="savebutton" onclick="save();">发起拍卖</button>';
@@ -111,8 +112,8 @@ function savebid() {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
 	
-	var nids = $("#nids").val();
-	var nidsmon = $("#nidsmon").val();
+	var nids = $("#nids").val();   //序号
+	var nidsmon = $("#nidsmon").val(); //价格
 	if (nids == "") {
 		alert("请输入序号。");
 		return;
@@ -124,7 +125,7 @@ function savebid() {
 
 	nids = nids.replace(/\n/g, "<br>");
 	nidsmon = nidsmon.replace(/\n/g, "<br>");
-	nebpay.call("n1pJv6t6maor5bFvSYYr17njY5PVva6P7Pd", ""+nidsmon, "bid", "[\""+nids +"\"]",{
+	nebpay.call(dappAddress, ""+nidsmon, "bid", "[\""+nids +"\"]",{
 		listener: function Push(resp) {
 			console.log("response of push: " + JSON.stringify(resp))
 			var respString = JSON.stringify(resp);
