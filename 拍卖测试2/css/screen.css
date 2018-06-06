@@ -332,8 +332,8 @@ pre {
   main post content
 ====================================================*/
 .post-content {
-  font: 400 18px/1.62 "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
-  color: #444443;
+  font: 20px "Microsoft YaHei", sans-serif;
+  color: #000000;
 }
 .post-content h1,
 .post-content h2,
