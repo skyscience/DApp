@@ -3,6 +3,19 @@ body, html {
     padding: 0;
 }
 
+@font-face{
+    font-family: 'PingFang Light';   /*字体名称*/
+    src: url('../font/PingFang\ Light.ttf');       /*字体源文件*/
+
+    font-family: 'PingFang Medium';   /*字体名称*/
+    src: url('../font/PingFang\ Medium.ttf');       /*字体源文件*/
+
+    font-family: 'FB';
+    src: url('../font/Agency\ FB.ttf');
+}
+
+
+
 body, 
 input,
 h1,
@@ -14,6 +27,7 @@ h6 {
     font-family: "Raleway", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: 300;
     font-size: 18px;
+    font-family: 'PingFang Medium';
 }
 
 body {
@@ -130,11 +144,11 @@ a {
 
 a:hover {
     text-decoration: underline;
-	color: #0032b1;
+	color: #4560E6;
 }
 
 a:active {
-    color: #0032b1;
+    color: #4560E6;
 }
 
 /* Header Styles */
@@ -189,6 +203,7 @@ nav ul, nav li {
     margin: 0;
     padding: 0;
     list-style: none;
+    font-family: 'PingFang Medium';
 }
 
 nav a {
@@ -210,7 +225,7 @@ nav h1 a {
 }
 
 nav a:hover {
-    background: #0032b1;
+    background: #4560E6;
     text-decoration: none;
 	color:#fff;
 }
@@ -288,7 +303,7 @@ nav #menu-toggle {
 
 /* Content Styles */
 section { padding: 1em 0 3em; text-align: center; }
-section.vibrant { background: #222; color: #fff; }
+section.vibrant { background: #222; font-size: 26px; color: #fff; font-family: 'PingFang Medium';}
 
 nav:before, 
 nav:after, 
@@ -428,6 +443,10 @@ input:focus {
 
     header {
         padding: 4em 0 4em 0; 
+    }
+    
+    .yt{
+        padding: 0 0 0 0;
     }
 
     .container {
