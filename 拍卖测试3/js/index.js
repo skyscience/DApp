@@ -29,7 +29,8 @@ $(function () {
 				for (var i = 0; i < res.length; i++) {
 					var pdpm = '';
 					if (time > res[i].end) {
-						pdpm = '<p color="red">拍卖已截至</p>';
+						pdpm += '<p color="red">拍卖已截止</p>';
+						pdpm += '<button type="button" class="btn btn-primary" id="conbidbutton" onclick="conbid(' + i + ');">确认完成拍卖</button>';
 					}
 					else {
 						pdpm = '<button type="button" class="btn btn-primary" id="savebidbutton" onclick="bidinfo(' + i + ');">参与拍卖</button>';
@@ -233,7 +234,7 @@ function save() {
 	content = content.replace(/\n/g, "<br>");
 	name = name.replace(/\n/g, "<br>");
 	var to = dappAddress;
-	var value = "0";
+	var value = "0.00002000001";//保证金
 	var callFunction = "savenew";
 	var callArgs = '["' + content + '",' + name + ']';
 	nebpay.call(to, value, callFunction, callArgs, {
@@ -249,7 +250,28 @@ function save() {
 	});
 };
 
-
+//确认按钮
+function conbid(i) {
+	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
+	var nebpay = new NebPay();
+	var ids = i.toString();   //序号
+	if (ids == "") {
+		alert("处理序号失败...");
+		return;
+	}
+	ids = ids.replace(/\n/g, "<br>");
+	nebpay.call(dappAddress, "0", "confirm", "[\"" + ids + "\"]", {
+		listener: function Push(resp) {
+			console.log("response of push: " + JSON.stringify(resp))
+			var respString = JSON.stringify(resp);
+			if (respString.search("rejected by user") !== -1) {
+				alert("关闭交易,取消确认")
+			} else if (respString.search("txhash") !== -1) {
+				alert("上传Hash: " + resp.txhash + "请等待交易确认")
+			}
+		}
+	})
+};
 //转换 时间戳
 function ttt(timestamp) {
 	var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
