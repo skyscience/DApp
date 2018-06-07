@@ -1,4 +1,4 @@
-var dappAddress = "n1mH3tZzXq3yq7PMBQU46tFU8hjvHYppZh9";
+var dappAddress = "n22ZJNHCfthvbqpmWPNdH5CkSVTAMb6f9ap";
 $(function () {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
@@ -24,22 +24,22 @@ $(function () {
 				}
 
 				var tempStr = "";
-				var time = Math.round(new Date().getTime()/1000).toString(); //获取当前时间戳
+				var time = Math.round(new Date().getTime() / 1000).toString(); //获取当前时间戳
 
 				for (var i = 0; i < res.length; i++) {
 					var pdpm = '';
-					if(time > res[i].end){
+					if (time > res[i].end) {
 						pdpm = '<p color="red">拍卖已截至</p>';
 					}
-					else{
+					else {
 						pdpm = '<button type="button" class="btn btn-primary" id="savebidbutton" onclick="bidinfo(' + i + ');">参与拍卖</button>';
 					}
 
 					cj = res[i].cjvalue / (10e17);
-					
 
 
-					
+
+
 					if (i % 2 == 0) {  //0 2 4 6 8
 						tempStr += '<div class="panel-body"> ';
 					} else {		//1 3 4 5 6
@@ -99,7 +99,7 @@ $(function () {
 		tempStr += '<textarea class="form-control" rows="1" id="nids" >0</textarea>';
 		tempStr += '<p>出价 (加价至少0.001)</p>';
 		tempStr += '<textarea class="form-control" rows="1" id="nidsmon" >0.001</textarea>';
-		tempStr += '<button type="button" class="btn btn-primary" id="savebidbutton" onclick="savebid();">参与拍卖</button>';
+		tempStr += '<button type="button" class="btn btn-primary" id="savebidbutton" onclick="savebid();">请点击列表中的"参与拍卖"按钮</button>';
 		tempStr += '</div>';
 		tempStr += '</form>';
 		tempStr += '</div> ';
@@ -115,10 +115,10 @@ $(function () {
 
 
 
-//===============================================
+//==========================================================
 //物品详情
 function bidinfo(i) {
-	$("#detailTitle").text("竞拍出价");
+    $("#detailTitle").text("竞拍出价");
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
 	var to = dappAddress;
@@ -135,6 +135,7 @@ function bidinfo(i) {
 				return;
 			}
 			var res = JSON.parse(resp.result);
+			alert("目前最高出价"+res[i].cjvalue);
 			if (res.length == 0) {
 				$("#searchresult").html('<div class="panel-body">暂无记录</div>');
 				return;
