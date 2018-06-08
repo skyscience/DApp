@@ -169,7 +169,7 @@ ConstantContract.prototype = {
 		var nowtime = Blockchain.transaction.timestamp; //获取当前时间戳
 
 
-		if (mjdz != author) {  //如果卖家地址不等于买家地址
+		if (mjdz === author || author !== pd.cjauthor) {  //判断 买家不能等于卖家     必须是买家而不是其它人
 			throw new Error("Not Local!");//地址匹配失败
 		}
 		var count = endtime - nowtime;
