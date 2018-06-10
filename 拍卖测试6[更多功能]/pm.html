@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>星云拍卖 - 拍卖</title>
+    
+    
+    <link rel="icon" href="img/logo.png" type="image/x-icon" />
+    <link rel="alternate" type="application/rss+xml" title="egrappler.com" href="feed/index.html">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/red_style.css">
+    <link rel="stylesheet" href="css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./css/screen.css">
+    <link rel="stylesheet" type="text/css" href="css/Loading/loader.css">
+
+
+    <script src="./js/jquery/jquery.min.js"></script>
+    <script src="./js/bootstrap/bootstrap.min.js"></script>
+    <script src="./js/pm.js"></script>
+    <script src="./js/nebPay.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="js/jquery/phanimate.jquery.js"></script>
+    <style type="text/css">
+        .custom-input1 {
+            position: relative;
+            padding-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .custom-input1 input {
+            padding-left: 15px;
+        }
+
+        .custom-input1 label {
+            cursor: text;
+            margin: 0;
+            padding: 0;
+            left: 15px;
+            top: 27px;
+            position: absolute;
+            font-size: 14px;
+            color: #ccc;
+            font-weight: normal;
+            transition: all .3s ease;
+        }
+
+        .custom-input1 label.active {
+            top: 0;
+            left: 0;
+            font-size: 12px;
+        }
+
+        .custom-input1 label.active.focusIn {
+            color: #66afe9;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <style type="text/css">
+        .ripple-container {}
+
+        .ripple-container .ripple {
+            background-color: rgba(255, 255, 255, 0.4);
+            animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            80% {
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .button1 {
+            background-color: #4560E6;
+            color: white;
+            padding: 10px 20px;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer
+        }
+
+        #savebidbutton {
+            background-color: #4560E6;
+            color: white;
+            padding: 10px 20px;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer
+        }
+
+        .button2 {
+            background-color: #F2BC18;
+            color: white;
+            padding: 10px 20px;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer
+        }
+
+        .button3 {
+            background-color: #12B362;
+            color: white;
+            padding: 10px 20px;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer
+        }
+    </style>
+
+
+
+    <script src="js/button.js"></script>
+    <script type="text/javascript">
+        // just add effect to elements
+        Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function (element) {
+            // find all elements and attach effect
+            new RippleEffect(element); // element is instance of javascript element node
+        });
+    </script>
+
+
+    <nav>
+        <div class="container">
+            <h1>星云拍卖</h1>
+            <div id="menu">
+                <ul class="toplinks">
+                    <li>
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="pm.html">拍卖</a>
+                    </li>
+                    <!-- <li><a href="user.html">我的</a></li> -->
+                    <li>
+                        <a href="about.html">关于</a>
+                    </li>
+                    <a class="en" href="en/pm.html">En</a>
+                </ul>
+            </div>
+            <a id="menu-toggle" href="#" class=" ">&#9776;</a>
+        </div>
+    </nav>
+    <header>
+        <div class="container">
+            <h2 id="detailTitle" class="docs-header"> 拍卖</h2>
+        </div>
+
+
+    </header>
+
+
+    <script type="text/javascript">   
+
+        function run() {
+            document.getElementById("sp").click();
+        }  
+    </script>
+
+    <section>
+        <div class="container">
+            <!-- 列表 -->
+            <section class="content-wrap">
+                <div class="container">
+                    <div class="row">
+                        <nav class="main-navigation">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="collapse navbar-collapse" id="main-menu =">
+                                            <ul class="menu">
+                                                <li id="allstars" class="nav-current" role="presentation">
+
+                                                    <body onload="run()">
+                                                        <a href="javascript:void(0)">
+                                                            <span id="sp">拍卖列表</span>
+                                                        </a>
+                                                    </body>
+
+                                                </li>
+                                                <!-- <li id="Mystars" role="presentation">
+                                                        <a href="javascript:void(0)">参与拍卖  </a>
+                                                    </li> -->
+                                                <li id="create" role="presentation">
+                                                    <a href="javascript:void(0)">发起拍卖 </a>
+                                                </li>
+                                                <li>
+                                                        <div id="search"></div>
+                                                </li>
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+
+                        <main class="col-md-8 main-content">
+                                
+                            <article id="110" class="post">
+                                    
+                                <div class="post-content">
+                                    <div>
+                                        
+                                        <div class="panel panel-success">
+                                                
+                                                        <div id="searchresult">
+                                                <!-- 加载中 ... -->
+                                                <div class="loading">
+                                                    <div class="loader loader-3">
+                                                        <div class="dot dot1"></div>
+                                                        <div class="dot dot2"></div>
+                                                        <div class="dot dot3"></div>
+                                                    </div>
+
+                                                    <br> 若加载时间过长请检查网络, 点击钱包插件查看余额是否显示. 确认后再次点击拍卖列表按钮
+                                                </div>
+
+
+                                                <div class="panel-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </main>
+
+
+                    </div>
+            </section>
+
+
+
+
+
+
+            <footer>
+                <div class="container">
+                    <p> &copy; 2018
+                        <a href="http://skyscience.cn/" target="_blank" title="天空科技">Skyscience</a> |
+                        <a href="https://nebulas.io/" title="星云链" target="_blank">Nebulas</a>
+                    </p>
+                </div>
+            </footer>
+            <script src="js/jquery.min.js"></script>
+            <script type="text/javascript" src="js/prettify/prettify.js"></script>
+            <!-- <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script> -->
+            <script src="js/layout.js"></script>
+            <script src="js/jquery.localscroll-1.2.7.js" type="text/javascript"></script>
+            <script src="js/jquery.scrollTo-1.4.3.1.js" type="text/javascript"></script>
+
+
+
+
+
+</body>
+
+</html>
