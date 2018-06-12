@@ -3,10 +3,6 @@ body, html {
     padding: 0;
 }
 
-img{
-    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-}
-
 @font-face{
     font-family: 'PingFang Light';   /*字体名称*/
     src: url('../font/PingFang\ Light.ttf');       /*字体源文件*/
@@ -14,8 +10,6 @@ img{
     font-family: 'PingFang Medium';   /*字体名称*/
     src: url('../font/PingFang\ Medium.ttf');       /*字体源文件*/
 
-    font-family: 'FB';
-    src: url('../font/Agency\ FB.ttf');
 }
 
 .zh,.en{
@@ -24,7 +18,9 @@ img{
  /*   position: initial; */
     right: 0;
     padding-left: 20px;
+    font-family: 'PingFang Light';
 }
+
 
 
 
@@ -35,8 +31,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: "Raleway", Helvetica, Arial, "Lucida Grande", sans-serif; 
+h6,
+p {
+    /* font-family: "Raleway", Helvetica, Arial, "Lucida Grande", sans-serif;  */
     font-weight: 300;
     font-size: 18px;
     font-family: 'PingFang Medium';
@@ -151,23 +148,24 @@ a {
     -o-transition: all ease 150ms;
     transition: all ease 150ms;
     text-decoration: none;
-    color: #333;
+    color: rgb(245, 245, 245);
+    font-size: 23px;
 }
 
 a:hover {
     text-decoration: underline;
-	color: #4560E6;
+	color: rgb(1, 162, 255);
 }
 
 a:active {
-    color: #4560E6;
+    color: rgb(1, 162, 255);
 }
 
 /* Header Styles */
 header {
     padding: 2em 0 2em 0; 
     text-align: center; 
-    background: #011341; 
+    background: rgb(255, 85, 1); 
     color: #fff;
 }
 
@@ -198,8 +196,8 @@ footer {
 }
 
 footer p {
-    margin: 0;
-    color: #999;
+    color: rgb(245, 245, 245);
+    font-size: 23px;
 }
 
 
@@ -215,7 +213,6 @@ nav ul, nav li {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: 'PingFang Medium';
 }
 
 nav a {
@@ -237,9 +234,9 @@ nav h1 a {
 }
 
 nav a:hover {
-    background: #4560E6;
+    background: #0032b104;
     text-decoration: none;
-	color:#fff;
+	color: rgb(1, 162, 255);
 }
 
 nav a:active {
@@ -276,7 +273,7 @@ nav #menu-toggle {
 
 @media only screen and (min-width: 680px) {
     nav, nav #menu {
-        height: 60px !important;
+        /* height: 60px !important; */
     }
 
     nav li, nav a {
@@ -315,7 +312,7 @@ nav #menu-toggle {
 
 /* Content Styles */
 section { padding: 1em 0 3em; text-align: center; }
-section.vibrant { background: #222; font-size: 26px; color: #fff; font-family: 'PingFang Medium';}
+section.vibrant { background: #222; color: #fff; }
 
 nav:before, 
 nav:after, 
@@ -456,17 +453,21 @@ input:focus {
     header {
         padding: 4em 0 4em 0; 
     }
-    
-    .yt{
-        padding: 0 0 0 0;
-    }
 
     .container {
         max-width: 1000px;
         padding: 0 20px;
     }
 
-    section { padding: 3em 0; text-align: left; }
+    .loading{
+        padding-left: 10%;
+    }
+    section { padding: 3em 0;text-align: left; }   
+    /* 删掉 text-align: left; 居中 */
+    
+
+
+
     section.centered {
         text-align: center;
     }

@@ -3,6 +3,11 @@ body, html {
     padding: 0;
 }
 
+.star{
+    display: inline;
+    color: rgb(229, 45, 76);
+}
+
 @font-face{
     font-family: 'PingFang Light';   /*字体名称*/
     src: url('../font/PingFang\ Light.ttf');       /*字体源文件*/
@@ -23,6 +28,7 @@ body, html {
 
 
 
+
 body, 
 input,
 h1,
@@ -33,9 +39,10 @@ h5,
 h6,
 p {
     /* font-family: "Raleway", Helvetica, Arial, "Lucida Grande", sans-serif;  */
-    font-weight: 300;
+    /* font-weight: 300; */
     font-size: 18px;
     font-family: 'PingFang Medium';
+    
 }
 
 body {
@@ -271,7 +278,7 @@ nav #menu-toggle {
 
 @media only screen and (min-width: 680px) {
     nav, nav #menu {
-        height: 60px !important;
+        /* height: 60px !important; */
     }
 
     nav li, nav a {
@@ -333,7 +340,8 @@ input {
     vertical-align: middle;
     line-height: 30px;
     margin: 0 auto;
-    width: 100%;
+    /* width: 100%; */
+    width: 400px;
     max-width: 400px;
 
        -moz-box-sizing: border-box;
@@ -346,6 +354,67 @@ input {
     transition: all linear 0.2s;
 }
 
+#search{
+    display: inline;
+    border-radius:5px;
+    vertical-align: middle;
+    line-height: 30px;
+    margin: 0 auto;
+    /* width: 100%; */
+    width: 300px;
+    height: 37px;
+    max-width: 400px;
+
+       -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+}
+
+#content{
+    /* display: block; */
+    border-radius:5px;
+    vertical-align: middle;
+    line-height: 30px;
+    margin: 0 auto;
+    /* width: 100%; */
+    width: 400px;
+    height: 300px;
+    max-width: 400px;
+
+       -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+}
+#day,#hour,#min{
+    border-radius:5px;
+    display: inline;
+    vertical-align: middle;
+    line-height: 30px;
+    margin: 0 auto;
+    /* width: 100%; */
+    width: 50px;
+    height: 37px;
+    max-width: 400px;
+
+       -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+}
 
 
 

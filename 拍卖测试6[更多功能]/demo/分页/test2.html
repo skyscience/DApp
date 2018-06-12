@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>分页</title>
+	<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+	<style type="text/css">
+ 	 	.table{border:solid #FFAEB9; border-width:1px 0px 0px 1px;width: 100%;font-size: 12px;line-height: 21px;text-align:center;}
+	 	.table thead td{border:solid #FFAEB9; border-width:0px 1px 1px 0px;}
+    	.table tbody td{border:solid #FFAEB9; border-width:0px 1px 1px 0px;padding-right: 5px;padding-left: 5px;}
+	</style>
+</head>
+<body>
+	<div style="width:450px;margin:0 auto;">
+	<div id="dataShow" style="width:450px;margin:0 auto;">
+		<table class="table" id="table"></table>
+	</div>
+	<br/>
+	<div id="page" style="width:450px;margin:0 auto;"></div>
+	</div>
+<script type="text/javascript">
+//编造表数据
+//表头
+var head=
+	'<thead><tr>'+
+	'<td> 姓  名 </td>'+
+	'<td> 年  龄 </td>'+
+	'<td> 彦  值* </td>'+
+	'<td> 成  绩 </td>'+
+	'<td> 身 高cm </td>'+
+	'</tr></thead><tbody>';
+//表内容，后台返回的内容可以封装到这里，随时取用，但是如果数据量很大估计会相当耗资源。
+var pageData=[];
+for(var i=1;i<100;i++){
+	var data='<tr>'+
+	'<td>学生'+i+'</td>'+
+	'<td>'+Math.round(Math.random()*20)+'</td>'+
+	'<td>'+Math.round(Math.random()*5)+'颗星</td>'+
+	'<td>'+Math.round(Math.random()*100)+'</td>'+
+	'<td>'+Math.round(Math.random()*200)+'cm</td>'+
+	'</tr>';
+	pageData.push(data);
+}
+//表结尾
+var end='</tbody>';
+
+$(function(){
+    var Count = pageData.length;//记录条数
+    var PageSize=10;//设置每页示数目
+    var PageCount=Math.ceil(Count/PageSize);//计算总页数
+    var currentPage =1;//当前页，默认为1。
+    //造个简单的分页按钮
+    for(var i=1;i<=PageCount;i++){
+	var pageN='<a href="#" selectPage="'+i+'" >第'+i+'页</a>';
+	$('#page').append(pageN);
+    }
+	//显示默认页（第一页）
+	$('#table').empty().append(head);
+    for(i=(currentPage-1)*PageSize;i<PageSize*currentPage;i++){	
+        $('#table').append(pageData[i]);
+    }
+	$('#table').append(end);
+	
+	//显示选择页的内容
+	$('a').click(function(){
+	 var selectPage=$(this).attr('selectPage');
+	 $('#table').html('');
+		$('#table').append(head);
+        for(i=(selectPage-1)*PageSize;i<PageSize*selectPage;i++){
+            $('#table').append(pageData[i]);
+        }
+		$('#table').append(end);
+    });
+});  
+</script>
+</body>
+</html>

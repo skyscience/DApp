@@ -516,7 +516,7 @@ pre {
   background: none;
   padding: 0;
 }
-.post-content table {
+.post-content  {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
@@ -531,13 +531,13 @@ pre {
 .post-content td {
   text-align: left;
   padding: 4px 8px 4px 10px;
-  border: 1px solid #dadada;
+
 }
 .post-content td {
   vertical-align: top;
 }
 .post-content tr:nth-child(even) {
-  background-color: #efefee;
+  /* background-color: #efefee;    列表灰色背景*/
 }
 .post-content iframe {
   display: block;
@@ -547,7 +547,7 @@ pre {
 .post-content figure iframe {
   margin: auto;
 }
-.post-content table pre {
+.post-content pre {
   margin: 0;
   padding: 0;
   border: none;

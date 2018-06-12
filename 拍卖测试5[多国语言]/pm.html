@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -125,11 +124,11 @@
             cursor: pointer
         }
     </style>
-
-
-
     <script src="js/button.js"></script>
     <script type="text/javascript">
+        function run() {
+            document.getElementById("sp").click();
+        }  
         // just add effect to elements
         Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function (element) {
             // find all elements and attach effect
@@ -167,13 +166,6 @@
 
     </header>
 
-
-    <script type="text/javascript">   
-
-        function run() {
-            document.getElementById("sp").click();
-        }  
-    </script>
 
     <section>
         <div class="container">
