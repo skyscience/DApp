@@ -1,8 +1,8 @@
 "use strict";
-//[ 6/7 21:01 ] 修正
-//[ 主网 ]  手续费: 0.00002 
-//Hash:  d660102053e22c22285bad29aedbae3f8d6c955d05ce8ad51ab8982df7ea3f43
-//地址: n229VtQzM2rg6YPv6ijiaPAUkwVhVb9wrGs
+//[ 6/12 20:00 ] 修正
+//[ 测试 ]  手续费: 0.00002 
+//Hash:  
+//地址: 
 
 
 //创建 历史价格类

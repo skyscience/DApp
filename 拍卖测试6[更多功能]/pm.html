@@ -21,14 +21,27 @@
     <link rel="stylesheet" type="text/css" href="css/Loading/loader.css">
 
 
-
     <script src="./js/jquery/jquery.min.js"></script>
     <script src="./js/bootstrap/bootstrap.min.js"></script>
     <script src="./js/pm.js"></script>
     <script src="./js/nebPay.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
     <script type="text/javascript" src="js/jquery/phanimate.jquery.js"></script>
+    <script src="js/button.js"></script>
 
+
+    <script type="text/javascript">
+        //等待页面加载完毕 加载列表
+        function run() {
+            document.getElementById("sp").click();
+        }
+        // window.onload=function(){  
+        //     document.getElementById("sp").click();
+        // }  
+        Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function (element) {
+            new RippleEffect(element); // element is instance of javascript element node
+        });
+    </script>
 
     <!-- 按钮样式 -->
     <style type="text/css">
@@ -97,6 +110,16 @@
             font-size: 14px;
             cursor: pointer
         }
+        .upbutton{
+            border-radius:5px;
+            background-color: #4560E6;
+            color: white;
+            padding: 10px 20px;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
 
         #savebidbutton {
             background-color: #4560E6;
@@ -127,30 +150,12 @@
             cursor: pointer
         }
     </style>
-
 </head>
 
 
 
 
 <body>
-    <script src="js/button.js"></script>
-    <script type="text/javascript">
-        //等待页面加载完毕 加载列表
-        function run() {
-            document.getElementById("sp").click();
-        }
-        // window.onload=function(){  
-        //     document.getElementById("sp").click();
-        // }  
-        Array.prototype.forEach.call(document.querySelectorAll('[data-ripple]'), function (element) {
-            new RippleEffect(element); // element is instance of javascript element node
-        });
-    </script>
-
-
-
-
     <!-- 页头 -->
     <nav>
         <div class="container">
@@ -178,7 +183,7 @@
 
 
 
-
+    <!-- 标题 -->
     <header>
         <div class="container">
             <h2 id="detailTitle" class="docs-header"> 拍卖</h2>
@@ -192,6 +197,8 @@
 
     <section>
         <div class="container">
+
+            <!-- 内容 -->
             <section class="content-wrap">
                 <div class="container">
                     <div class="row">
@@ -205,7 +212,6 @@
                                         <div class="collapse navbar-collapse" id="main-menu =">
                                             <ul class="menu">
                                                 <li id="allstars" class="nav-current" role="presentation">
-
                                                     <body onload="run()">
                                                         <a href="javascript:void(0)">
                                                             <span id="sp">拍卖列表</span>
@@ -220,6 +226,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                             <!-- 搜索框 -->
                             <div>
                                 <input type="text" class="form-control" rows="1" id="search" placeholder="">
@@ -258,7 +266,6 @@
 
 
 
-
             <!-- 页尾 -->
             <footer>
                 <div class="container">
@@ -281,6 +288,7 @@
 
         </div>
     </section>
-</body>
 
+    
+</body>
 </html>

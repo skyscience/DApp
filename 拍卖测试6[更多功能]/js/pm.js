@@ -93,13 +93,13 @@ $(function () {
 		tempStr += '<input type="text" class="form-control" rows="1" id="local" placeholder="xx市 xx区 xx街道">';
 		tempStr += '<h6>物品图片URL</h6>';
 		tempStr += '<input type="text" class="form-control" rows="1" id="img" placeholder="http://xxxx.cn/img6901.png">';
+		
 		tempStr += '<h6><p class="star">*</p>拍卖时长 </h6>';
-		tempStr += '<p>天数</p><input type="text" id="day" rows="1" id="time" placeholder="1">';
-		tempStr += '<p>小时</p><input type="text" id="hour" rows="1" id="time" placeholder="0">';
-		tempStr += '<p>分钟</p><input type="text" id="min" rows="1" id="time" placeholder="0">';
+		tempStr += '<input type="text" class="time" id="day" rows="1" id="time" placeholder="1"><p>天</p>';
+		tempStr += '<input type="text" class="time" id="hour" rows="1" id="time" placeholder="0"><p>小时</p>';
+		tempStr += '<input type="text" class="time" id="min" rows="1" id="time" placeholder="0"><p>分钟</p>  <br><br>';
+
 		tempStr += '<button type="button" class="button1" id="savebutton" onclick="save();">发起拍卖</button>';
-
-
 		tempStr += '</div>';
 		tempStr += '</form>';
 		tempStr += '</div> ';
@@ -114,6 +114,18 @@ $(function () {
 
 
 
+//==========================================================
+/* ID
+名称 name
+详情 content
+联系 contact
+地址 loacl
+图片 img
+时间:
+	天 day
+	时 hour
+	分 min
+*/
 //==========================================================
 //物品详情
 function bidinfo(i) {
@@ -220,17 +232,34 @@ function savebid(i) {
 function save() {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
-	var content = $("#content").val();
-	var name = $("#time").val();
-	if (content == "") {
-		alert("请输入描述。");
+	
+	var name = $("#name").val();    //名称
+	var content = $("#content").val();	//内容
+	var contact = $("#contact").val();	//联系
+	var local = $("#local").val();		//地址
+	var img = $("#img").val();		//图片
+	var day = $("#day").val();		//天数
+	var hour = $("#hour").val();	//小时
+	var min = $("#min").val();		//分钟
+
+	if (name == "") {
+		alert("请输入物品名称。");
 		return;
 	}
-	if (name == "") {
-		alert("请输入持续时间 (秒)");
+	if (content == "") {
+		alert("请输入物品描述。");
+		return;
+	}
+	if (contact == "") {
+		alert("请输入您的联系方式。");
+		return;
+	}
+	if (min == "") {
+		alert("请输入持续时间 (分钟)");
 		return;
 	}
 
+	
 	content = content.replace(/\n/g, "<br>");
 	name = name.replace(/\n/g, "<br>");
 	var to = dappAddress;

@@ -395,7 +395,7 @@ input {
     -o-transition: all linear 0.2s;
     transition: all linear 0.2s;
 }
-#day,#hour,#min{
+.time{
     border-radius:5px;
     display: inline;
     vertical-align: middle;
