@@ -1,8 +1,7 @@
 "use strict";
-//[ 6/12 20:00 ] 修正
-//[ 测试 ]  手续费: 0.00002 
-//Hash:  
-//地址: 
+//[ 6/14 12:28 ] 修正
+//[ 主网 ]  手续费: 0.00002 
+//地址:  n1iyjYxP3vUgRKs5wcoky4cpeVhGeCCs121
 
 
 //创建 历史价格类
@@ -17,16 +16,47 @@ var obj1Info = function (text) {
 	}
 };
 
+//创建 个人信息类
+var obj_user = function (text) {
+	if (text) {
+		var obj = JSON.parse(text); // 如果传入的内容不为空将字符串解析成json对象
+		this.user = obj.user; // 用户名
+		this.content = obj.content; // 内容
+		this.img = obj.img;
+		this.fb = obj.fb;
+		this.tw = obj.tw;
+		this.gh = obj.gh;
+		this.si = obj.si;
+		this.wc = obj.wc;
+		this.qq = obj.qq;
+		this.gg = obj.gg;
+	} else {
+		this.user = "";
+		this.content = "";
+		this.img = "";
+		this.fb = "";
+		this.tw = "";
+		this.gh = "";
+		this.si = "";
+		this.wc = "";
+		this.qq = "";
+		this.gg = "";
+	}
+};
+
+
 
 
 //创建 存储类
 var ConstantContract = function () {
 	LocalContractStorage.defineMapProperty(this, "infoMap"); //商品信息
 	LocalContractStorage.defineMapProperty(this, "moneyMap"); //拍卖价格
+	LocalContractStorage.defineMapProperty(this, "userMap"); //个人信息
 	LocalContractStorage.defineProperty(this, "list");  //列表
 };
 var obj = new Object(); //实例化默认obj
 var obj1 = new obj1Info(); //历史 出价
+var obj_user = new obj_user();//个人信息
 
 
 
@@ -40,20 +70,22 @@ ConstantContract.prototype = {
 
 
 	//拍卖发起
-	savenew: function (info, time) {  //物品信息，  拍卖时间秒数
+	savenew: function (name, info, contact, local, img, time) {  //名称	详情	联系	地址	图片	时间
 		info = info.trim();
 		//判断物品信息是否存在
-		if (info === "") { 
+		if (info === "") {
 			throw new Error("Is None !");
 		}
-
-
 
 
 		var key = this.list;	//列表
 		this.list += 1;
 		obj.index = key; 	 //序号
-		obj.info = info;    //内容
+		obj.name = name;	//名称
+		obj.info = info;    //详情
+		obj.contact = contact; //联系
+		obj.local = local; //地址
+		obj.img = img; //图片
 		obj.author = Blockchain.transaction.from; //卖家 钱包地址
 		obj.value = Blockchain.transaction.value;	 //获取保证金
 		obj.createdDate = Blockchain.transaction.timestamp;  //创建时的 时间戳
@@ -70,6 +102,8 @@ ConstantContract.prototype = {
 		obj1.author = null;	   //初始化 出价钱包地址;
 		obj.cjvalue = obj1.value;  //将出价 添加到物品信息
 		obj.cjauthor = obj1.author;
+
+		obj.wc_time = '';
 
 
 		this.moneyMap.put(key, JSON.stringify(obj1)); //保存出价金额
@@ -140,17 +174,32 @@ ConstantContract.prototype = {
 		this.moneyMap.put(key1, JSON.stringify(obj1));  //保存历史价格
 
 
-		obj.value = cj.value;
-		obj.index = cj.index;
-		obj.info = cj.info;
-		obj.author = cj.author;
-		obj.createdDate = cj.createdDate;
-		obj.end = cj.end;
+		obj.index = cj.index;//序号
+		obj.name = cj.name; //名称
+		obj.info = cj.info;//详情
+		obj.contact = cj.contact;//联系
+		obj.local = cj.local;//地址
+		obj.img = cj.img;//图片
+		obj.author = cj.author;//卖家钱包
+		obj.createdDate = cj.createdDate;//创建时间
+		obj.end = cj.end;//结束时间
+		obj.wc_time = cj.wc_time;  //成交时间
 		obj.cjvalue = mavalue;  //存入历史价格 
 		obj.cjauthor = maauthor; //存入历史买家
 		this.infoMap.put(key1, JSON.stringify(obj));    //保存物品信息
 	},
-
+	/*
+			obj.index //序号
+			obj.name;	//名称
+			obj.info = //详情
+			obj.contact =  //联系
+			obj.local =; //地址
+			obj.img = ; //图片
+			obj.author = //卖家 钱包地址
+			obj.value =  //获取保证金
+			obj.createdDate = //创建时的 时间戳
+			obj.end =  //终止时间戳	
+	*/
 
 
 
@@ -180,28 +229,86 @@ ConstantContract.prototype = {
 
 
 
-		var bzj = pd.value;  //保证金
 		var money = pd.cjvalue;  //获取拍卖金额
 		var sxfmoney = money * 0.01;  //拍卖金额*手续费
 		var bidmoney = money * 0.99;// 拍卖金额*(1-手续费比例)＋保证金   
-		//加上保证金的话就执行到这throw new Error("m_transfer failed.");
+
 
 
 
 		//将手续费转给 我们 sxfmoney
-		var result = Blockchain.transfer('n1JJ8FKGy1kNvna4RTuQyVRcaeV5KLgD8rK', sxfmoney); 
+		var result = Blockchain.transfer('n1JJ8FKGy1kNvna4RTuQyVRcaeV5KLgD8rK', sxfmoney);
 		if (!result) {
 			throw new Error("transfer failed.");
 		}
+	
 
-
-		 //转给卖家  bidmoney
+		//转给卖家  bidmoney
 		var mresult = Blockchain.transfer(mjdz, bidmoney);
 		if (!mresult) {
 			throw new Error("m_transfer failed.");
 		}
-		return nowtime;
-	}
-};
-module.exports = ConstantContract;
 
+
+
+		
+		obj.index = pd.index;//序号
+		obj.name = pd.name; //名称
+		obj.info = pd.info;//详情
+		obj.contact = pd.contact;//联系
+		obj.local = pd.local;//地址
+		obj.img = pd.img;//图片
+		obj.author = pd.author;//卖家钱包
+		obj.createdDate = pd.createdDate;//创建时间
+		obj.end = pd.end;//结束时间
+		obj.wc_time = nowtime;  //成交时间
+
+		obj.cjvalue = money;  //存入历史价格 
+		obj.cjauthor = mjdz; //存入历史买家
+		this.infoMap.put(key2, JSON.stringify(obj));    //保存物品信息
+		return nowtime;
+	},
+
+
+
+
+
+
+
+//===================   个人信息   ===========================
+	//储存信息
+	save_user: function (user,content,img,fb,tw,gh,si,wc,qq,gg) {  //用户名  简介  图片  
+
+
+		obj_user.author = Blockchain.transaction.from; //用户 钱包地址
+		obj_user.createdDate = Blockchain.transaction.timestamp;  //创建时的 时间戳
+		
+
+		obj_user.user = user;
+		obj_user.content = content;
+		obj_user.img = img;
+		obj_user.fb = fb;
+		obj_user.tw = tw;
+		obj_user.gh = gh;
+		obj_user.si = si;
+		obj_user.wc = wc;
+		obj_user.qq = qq;
+		obj_user.gg = gg;
+		this.userMap.put(obj_user.author, JSON.stringify(obj_user));    //保存个人信息
+	},
+
+
+
+
+	//获取用户信息
+	user_info: function (local) {  // 钱包地址
+		var user = JSON.parse(this.userMap.get(local)); //获取用户信息
+		return user;
+	}
+
+};
+
+
+
+
+module.exports = ConstantContract;

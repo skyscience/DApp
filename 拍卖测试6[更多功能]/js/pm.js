@@ -1,4 +1,8 @@
-var dappAddress = "n229VtQzM2rg6YPv6ijiaPAUkwVhVb9wrGs";
+var dappAddress = "n1iyjYxP3vUgRKs5wcoky4cpeVhGeCCs121";
+var pdmore = '';
+var length = 0;
+
+
 $(function () {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
@@ -11,35 +15,49 @@ $(function () {
 		var value = "0";
 		var callFunction = "getlist";
 		var callArgs = "[]";
+
+
 		nebpay.simulateCall(to, value, callFunction, callArgs, {
 			listener: function (resp) {
 				var ui = document.getElementById("loading");
+				var res = JSON.parse(resp.result);
+				var tempStr = "";
+				var time = Math.round(new Date().getTime() / 1000).toString(); //获取当前时间戳
+
 				ui.style.display = "none";
-				//console.log(JSON.stringify(resp.result));
 				if (resp.result == "") {
 					$("#searchresult").html('<div class="panel-body" >暂无记录</div>');
 					return;
 				}
-				var res = JSON.parse(resp.result);
+
 				if (res.length == 0) {
 					$("#searchresult").html('<div class="panel-body">暂无记录</div>');
 					return;
 				}
-
-				var tempStr = "";
-				var time = Math.round(new Date().getTime() / 1000).toString(); //获取当前时间戳
-
-
 				$("#search_click").html();
-				for (var i = 0; i < res.length; i++) {
-					var pdpm = '';
 
-					if (time > res[i].end) {
-						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截至");">拍卖已截至</button><br><br>';
-						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="conbid(' + i + ');">确认完成拍卖</button>';
+
+
+
+				length += 20;
+				if (length > res.length) {
+					length = res.length;
+				}
+
+
+
+
+				for (var i = 0; i < length; i++) {
+					var pdpm = '';
+					if(res[i].wc_time !== ''){
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">'+'已成交    时间:'+ttt(res[i].wc_time)+'   买家:'+res[i].cjauthor+'</button>&nbsp;';
+					}
+					else if (time > res[i].end) {
+						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">拍卖已截止</button>&nbsp;';
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="conbid(' + i + ');">确认完成拍卖</button><br>';
 					}
 					else {
-						pdpm = '<button type="button1" class="button1" id="savebidbutton" onclick="bidinfo(' + i + ');">参与拍卖</button>';
+						pdpm = '<button type="button1" class="button1" id="savebidbutton" onclick="bidinfo(' + i + ');">参与拍卖</button><br>';
 					}
 
 
@@ -50,13 +68,16 @@ $(function () {
 						tempStr += '<div class="panel-footer">';
 					}
 
-					tempStr += '<p>';
-					tempStr += res[i].index + " 内容:" + res[i].info;
-					tempStr += '</p>';
+					tempStr += '<div class="list">';
+					tempStr += '<h5>[' +res[i].index +']  &nbsp;&nbsp;&nbsp;'+ res[i].name + '</h5>'
+
+
+
+
+					tempStr += '<h6 style="display: initial">' + res[i].local + '</h6> <img src="' + res[i].img + '" class="img_zs" alt="">'
+
 					tempStr += '<p><br>';
-					tempStr += '<small><cite>' + '昵称:' + res[i].author + '</cite></small>';
-					tempStr += '<br>';
-					tempStr += '<small><cite>' + '地址:' + res[i].author + '</cite></small>';
+					tempStr += '<small><cite>' + '钱包地址:' + res[i].author + '</cite></small>';
 					tempStr += '<br>';
 					tempStr += '<small><cite>' + '发起时间:' + ttt(res[i].createdDate) + '</cite></small>';
 					tempStr += '<br>';
@@ -64,12 +85,27 @@ $(function () {
 					tempStr += '<br>';
 					tempStr += '<small><cite>' + '目前出价:' + cj + '</cite></small> <br>';
 					tempStr += pdpm;
-					tempStr += '</p> <hr> ';
+					tempStr += '</p>  ';
+
+
+					var jg = length - i;
+					if (jg == 1 && i + 1 == length) {
+						pdmore = '<button type="button1" class="button4" id="more" onclick="run();">加载更多</button>';
+					}
+					if (res.length == i + 1) {
+						pdmore = '<h5 class="nomore">没有更多信息了... </h5>';
+					}
+
+
+
+					tempStr += pdmore + '</div> <br><br>';
+					pdmore = '';
 				}
 				$("#searchresult").html(tempStr);
 			}
 		});
 	});
+
 
 
 	//发起拍卖
@@ -78,6 +114,7 @@ $(function () {
 		var ui = document.getElementById("loading");
 		ui.style.display = "none";
 		var tempStr = '';
+		tempStr += '<div class="list">';
 		tempStr += '<div class="panel-body"> ';
 		tempStr += '<form role="form">';
 		tempStr += '<div class="form-group">'; //秒数name  详细内容content  
@@ -93,8 +130,8 @@ $(function () {
 		tempStr += '<input type="text" class="form-control" rows="1" id="local" placeholder="xx市 xx区 xx街道">';
 		tempStr += '<h6>物品图片URL</h6>';
 		tempStr += '<input type="text" class="form-control" rows="1" id="img" placeholder="http://xxxx.cn/img6901.png">';
-		
-		tempStr += '<h6><p class="star">*</p>拍卖时长 </h6>';
+
+		tempStr += '<h6><p class="star">*</p>拍卖时长 (如果不需要请留空)</h6>';
 		tempStr += '<input type="text" class="time" id="day" rows="1" id="time" placeholder="1"><p>天</p>';
 		tempStr += '<input type="text" class="time" id="hour" rows="1" id="time" placeholder="0"><p>小时</p>';
 		tempStr += '<input type="text" class="time" id="min" rows="1" id="time" placeholder="0"><p>分钟</p>  <br><br>';
@@ -103,32 +140,16 @@ $(function () {
 		tempStr += '</div>';
 		tempStr += '</form>';
 		tempStr += '</div> ';
+		tempStr += '</div>';
 		console.log(tempStr);
 		$("#searchresult").html(tempStr);
 	});
 });
 
 
-
-
-
-
-
-//==========================================================
-/* ID
-名称 name
-详情 content
-联系 contact
-地址 loacl
-图片 img
-时间:
-	天 day
-	时 hour
-	分 min
-*/
-//==========================================================
 //物品详情
 function bidinfo(i) {
+
 	$("#detailTitle").text("竞拍出价");
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
@@ -159,22 +180,28 @@ function bidinfo(i) {
 			}
 
 
+			//图片
+			tempStr += '<div class="list"><img src="' + res[i].img + '" class="img_zs1" alt="">';
+			tempStr += '<hr>';
 			//商品序号
 			tempStr += '<div class="xh">';
-			tempStr += "商品序号：" + res[i].index + "<br> 内容:" + res[i].info;
+			tempStr += "商品序号：" + res[i].index + "<br> 名称:" + res[i].name + "<br> 详情:" + res[i].info;
 			tempStr += '</div>';
-			tempStr += '<hr>';
+			tempStr += '<br><br>';
 
 
 			//商品信息
 			tempStr += '<div class="info">';
-			tempStr += '<small><cite>' + '卖家钱包:' + res[i].author + '</cite></small>';
+			tempStr += '<small><cite>' + '联系方式:' + res[i].contact + '</cite></small>';
+			tempStr += '<br>';
+			tempStr += '<small><cite>' + '地址:' + res[i].local + '</cite></small>';
 			tempStr += '<br>';
 			tempStr += '<small><cite>' + '上架时间:' + ttt(res[i].createdDate) + '</cite></small>';
 			tempStr += '<br>';
-			tempStr += '<small><cite>' + '拍卖截至时间:' + ttt(res[i].end) + '</cite></small>';
+			tempStr += '<small><cite>' + '拍卖截止时间:' + ttt(res[i].end) + '</cite></small>';
 			tempStr += '<br>';
 			tempStr += '<small><cite>' + '目前最高出价:' + cj + '</cite></small>';
+			tempStr += '<small>' +'卖家钱包:' + '</small> '+'<input type="text" id="txt" style="width: 30%;height: 30px;" value="'+res[i].author+'">'  +'<input type="button" class="button5" value="卖家详情" onclick="test()"/>  ';
 			tempStr += '</div>';
 			tempStr += '<hr>';
 
@@ -182,16 +209,22 @@ function bidinfo(i) {
 			//出价
 			tempStr += '<div class="cj">';
 			tempStr += '出价 (加价至少0.001)';
-			tempStr += '<br><input type="text" class="form-control" rows="1" id="nidsmon"  placeholder="0.001">';
-			tempStr += '<br><button type="button" class="btn btn-primary" id="savebidbutton" onclick="savebid(' + i + ');">参与拍卖</button>';
+			tempStr += '<br><input type="text" class="form-control" rows="1" id="nidsmon"  placeholder="0.001" style="width:15%;">';
+			tempStr += '<button type="button" class="btn btn-primary" id="savebidbutton" onclick="savebid(' + i + ');">参与拍卖</button>';
 			tempStr += '</div>';
 			tempStr += '</form>';
-			tempStr += '</div> ';
+			tempStr += '</div></div> ';
 			$("#searchresult").html(tempStr);
 		}
 	});
 }
 
+
+//js传值 到user.js
+function test() {
+	var s = document.getElementById("txt");
+	location.href = "user.html?" + "txt=" + encodeURI(s.value);
+}
 
 
 
@@ -232,7 +265,7 @@ function savebid(i) {
 function save() {
 	var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 	var nebpay = new NebPay();
-	
+
 	var name = $("#name").val();    //名称
 	var content = $("#content").val();	//内容
 	var contact = $("#contact").val();	//联系
@@ -254,18 +287,38 @@ function save() {
 		alert("请输入您的联系方式。");
 		return;
 	}
-	if (min == "") {
-		alert("请输入持续时间 (分钟)");
+
+	if ((day + hour + min) <= 0) {
+		alert("请输入拍卖时长。");
+		return;
+	}
+	if (isNaN(day + hour + min)) {
+		alert("请在拍卖时长中 输入数字。");
+		return;
+	}
+	if ((day + hour + min) >= 602359) {
+		alert("输入的值不得超过 60天 23小时 59分。");
 		return;
 	}
 
-	
-	content = content.replace(/\n/g, "<br>");
+
+	var days = day * 24 * 60 * 60;
+	var hours = hour * 60 * 60;
+	var mins = min * 60;
+	var time = days + hours + mins;
+
+
 	name = name.replace(/\n/g, "<br>");
+	content = content.replace(/\n/g, "<br>");
+	contact = contact.replace(/\n/g, "<br>");
+	local = local.replace(/\n/g, "<br>");
+	img = img.replace(/\n/g, "<br>");
+
+
 	var to = dappAddress;
 	var value = "0.00002000001";//保证金
 	var callFunction = "savenew";
-	var callArgs = '["' + content + '",' + name + ']';
+	var callArgs = '["' + name + '","' + content + '","' + contact + '","' + local + '","' + img + '",' + time + ']';
 	nebpay.call(to, value, callFunction, callArgs, {
 		listener: function Push(resp) {
 			console.log("response of push: " + JSON.stringify(resp))
@@ -338,7 +391,7 @@ function search() {
 
 
 			for (var i = 0; i < res.length; i++) {
-				var count = res[i].info.search(search,'i');
+				var count = res[i].name.search(search, 'i');
 				var pdpm = '';
 				if (!count) {
 					j.push(i);
@@ -349,14 +402,18 @@ function search() {
 			if (j.length !== 0) {
 				for (var z = 0; z < j.length; z++) {
 					var c = j[z];
-					if (time > res[c].end) {
-						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截至");">拍卖已截至</button><br><br>';
-						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="conbid(' + i + ');">确认完成拍卖</button>';
+					if(res[c].wc_time !== ''){
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">'+'已成交    时间:'+ttt(res[c].wc_time)+'   买家:'+res[c].cjauthor+'</button>&nbsp;';
+					}
+					else if (time > res[c].end) {
+						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">拍卖已截止</button>&nbsp;';
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="conbid(' + z + ');">确认完成拍卖</button><br>';
 					}
 					else {
-						pdpm = '<button type="button1" class="button1" id="savebidbutton" onclick="bidinfo(' + i + ');">参与拍卖</button>';
+						pdpm = '<button type="button1" class="button1" id="savebidbutton" onclick="bidinfo(' + z + ');">参与拍卖</button><br>';
 					}
 
+					
 
 					cj = res[c].cjvalue / (10e17);
 					if (i % 2 == 0) {  //0 2 4 6 8
@@ -366,13 +423,11 @@ function search() {
 					}
 
 
-					tempStr += '<p>';
-					tempStr += res[c].index + " 内容:" + res[c].info;
-					tempStr += '</p>';
-					tempStr += '<p>';
-					tempStr += '<small><cite>' + '昵称:' + res[c].author + '</cite></small>';
-					tempStr += '<br>';
-					tempStr += '<small><cite>' + '地址:' + res[c].author + '</cite></small>';
+					tempStr += '<div class="list">';
+					tempStr += '<h5>[' +res[c].index +']  &nbsp;&nbsp;&nbsp;'+ res[c].name + '</h5>'
+					tempStr += '<h6 style="display: initial">' + res[c].local + '</h6> <img src="' + res[c].img + '" class="img_zs" alt="">'
+					tempStr += '<p><br>';
+					tempStr += '<small><cite>' + '钱包地址:' + res[c].author + '</cite></small>';
 					tempStr += '<br>';
 					tempStr += '<small><cite>' + '发起时间:' + ttt(res[c].createdDate) + '</cite></small>';
 					tempStr += '<br>';
@@ -380,7 +435,10 @@ function search() {
 					tempStr += '<br>';
 					tempStr += '<small><cite>' + '目前出价:' + cj + '</cite></small> <br>';
 					tempStr += pdpm;
-					tempStr += '</p> </div><hr> ';
+					tempStr += '</p>  ';
+					tempStr += '</div> <br><br>';
+
+
 					$("#searchresult").html(tempStr);
 					pdpm = '';  //清空 防止调回
 				}
@@ -397,7 +455,7 @@ function search() {
 
 
 
-//转换 时间戳
+//转换 时间戳10位
 function ttt(timestamp) {
 	var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
 	Y = date.getFullYear() + '-';

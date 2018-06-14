@@ -3,6 +3,19 @@ body, html {
     padding: 0;
 }
 
+.img_zs{
+    width: 128px;
+    height: 128px;
+}
+
+.img_zs1 {
+    width: 1024px;
+    height: 768px;
+    border-radius: 12px;
+    left: -1.2%;
+    position: relative;
+}
+
 .star{
     display: inline;
     color: rgb(229, 45, 76);
@@ -15,7 +28,12 @@ body, html {
     font-family: 'PingFang Medium';   /*字体名称*/
     src: url('../font/PingFang\ Medium.ttf');       /*字体源文件*/
 
+    font-family: 'MY';   /*字体名称*/
+    src: url('../font/微软雅黑.ttf');       /*字体源文件*/
 }
+
+
+
 
 .zh,.en{
     float: right;
@@ -41,8 +59,7 @@ p {
     /* font-family: "Raleway", Helvetica, Arial, "Lucida Grande", sans-serif;  */
     /* font-weight: 300; */
     font-size: 18px;
-    font-family: 'PingFang Medium';
-    
+    font-family: 'MY';
 }
 
 body {
@@ -344,9 +361,9 @@ input {
     width: 400px;
     max-width: 400px;
 
-       -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
 
     -webkit-transition: all linear 0.2s;
     -moz-transition: all linear 0.2s;

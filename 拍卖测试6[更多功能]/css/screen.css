@@ -8,6 +8,19 @@
 /*====================================================
 	common styles
 ====================================================*/
+
+@font-face{
+  font-family: 'PingFang Light';   /*字体名称*/
+  src: url('../font/PingFang\ Light.ttf');       /*字体源文件*/
+
+  font-family: 'PingFang Medium';   /*字体名称*/
+  src: url('../font/PingFang\ Medium.ttf');       /*字体源文件*/
+
+  font-family: 'MY';   /*字体名称*/
+  src: url('../font/微软雅黑.ttf');       /*字体源文件*/
+}
+
+
 html,
 body {
   color: #505050;
@@ -146,6 +159,7 @@ pre {
 }
 /* main-navigation */
 .main-navigation {
+  border-radius:12px;
   text-align: center;
   /* background: #ffffff; */
   border-top: 1px solid #ebebeb;
@@ -252,7 +266,7 @@ pre {
 ====================================================*/
 .post {
   padding: 35px;
-  background: #ffffff;
+  /* background: #ffffff; */
   margin-bottom: 35px;
   position: relative;
   overflow: hidden;
@@ -365,6 +379,7 @@ pre {
 .post-content h6 {
   font-size: 1em;
   margin: 1.6em 0 1em 0;
+  font-family: 'PingFang Medium';
 }
 .post-content h6 {
   font-weight: 500;

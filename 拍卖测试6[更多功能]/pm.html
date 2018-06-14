@@ -77,16 +77,18 @@
             font-size: 12px;
         }
 
+
         .custom-input1 label.active.focusIn {
             color: #66afe9;
+            
         }
-
 
 
         .ripple-container .ripple {
             background-color: rgba(255, 255, 255, 0.4);
             animation: ripple 2s forwards cubic-bezier(0, 0, 0.2, 1);
         }
+
 
         @keyframes ripple {
             0% {
@@ -102,6 +104,24 @@
         }
 
         .button1 {
+            border-radius:5px;
+            background-color: #4560E6;
+            color: white;
+            padding: 10px 20px;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer
+        }
+        .nomore {
+            position: relative;
+            bottom: 0px;
+            left: 41.7%;
+        
+        }
+        .button4 {
+            position: relative;
+            bottom: 0px;
+            left: 41.7%;
             border-radius:5px;
             background-color: #4560E6;
             color: white;
@@ -147,7 +167,39 @@
             padding: 10px 20px;
             border: 0;
             font-size: 14px;
-            cursor: pointer
+            cursor: pointer;
+        }
+        .button5 {
+            border-radius:5px;
+            background-color: #12B362;
+            color: white;
+            border: 0;
+            font-size: 14px;
+            cursor: pointer;
+            width: 12.4%;
+        }
+        
+
+        .search{
+            margin-top: 10px;
+        }
+        .list{
+            background-color: #ffffff;
+            border-radius:15px;
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        .img_zs{
+            border-radius:12px;
+            position: relative;
+            top: 14%;
+            right: -57%;
+        }
+        .ts{
+            /* margin-r */
+            position: relative;
+            left: 50px;
         }
     </style>
 </head>
@@ -174,7 +226,7 @@
                     <li>
                         <a href="about.html">关于</a>
                     </li>
-                    <a class="en" href="en/index.html">En</a>
+                    <a class="en" href="en/pm.html">En</a>
                 </ul>
             </div>
             <a id="menu-toggle" href="#" class=" ">&#9776;</a>
@@ -204,7 +256,7 @@
                     <div class="row">
                         <nav class="main-navigation">
 
-
+                            
                             <!-- 选择框 -->
                             <div class="container">
                                 <div class="row">
@@ -227,9 +279,9 @@
                                 </div>
                             </div>
 
-
+                            
                             <!-- 搜索框 -->
-                            <div>
+                            <div class="search">
                                 <input type="text" class="form-control" rows="1" id="search" placeholder="">
                                 <button class="button1" class="btn btn-primary" id="savebutton" onclick="search();">搜索</button>
                             </div>
@@ -252,7 +304,7 @@
                                                     <div class="dot dot2"></div>
                                                     <div class="dot dot3"></div>
                                                 </div>
-                                                <br> 若加载时间过长请检查网络, 点击钱包插件查看余额是否显示. 确认后再次点击拍卖列表按钮
+                                                <br> <div class="ts">若加载时间过长请检查网络, 点击钱包插件查看余额是否显示. 确认后再次点击拍卖列表按钮</div>
                                             </div>
                                         </div>
                                     </div>
