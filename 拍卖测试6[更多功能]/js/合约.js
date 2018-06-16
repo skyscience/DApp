@@ -1,7 +1,8 @@
 "use strict";
 //[ 6/14 12:28 ] 修正
 //[ 主网 ]  手续费: 0.00002 
-//地址:  n1iyjYxP3vUgRKs5wcoky4cpeVhGeCCs121
+//地址:  n1o2rHoUHnAVBGSvd73zzwZxesyRi7Nr21Q
+//Hash:  bd7e90598ef797def6fe25b1a26656abed91104cb4cbba2f6b61cea2bf89dcaa
 
 
 //创建 历史价格类
@@ -188,6 +189,8 @@ ConstantContract.prototype = {
 		obj.cjauthor = maauthor; //存入历史买家
 		this.infoMap.put(key1, JSON.stringify(obj));    //保存物品信息
 	},
+
+	
 	/*
 			obj.index //序号
 			obj.name;	//名称
@@ -200,7 +203,6 @@ ConstantContract.prototype = {
 			obj.createdDate = //创建时的 时间戳
 			obj.end =  //终止时间戳	
 	*/
-
 
 
 	//完成拍卖

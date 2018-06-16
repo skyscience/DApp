@@ -8,7 +8,7 @@ $(function () {
 	var nebpay = new NebPay();
 
 
-	//列表
+	//列表    7-44
 	$("#allstars").click(function () {
 		$("#detailTitle").text("拍卖列表")
 		var to = dappAddress;
@@ -39,18 +39,24 @@ $(function () {
 
 
 
-				length += 20;
-				if (length > res.length) {
-					length = res.length;
-				}
+				// length += 20;
+				// if (length > res.length) {
+				// 	length = res.length;
+				// }
 
 
 
+				// for (var i = 0; i < length; i++) {
+				for (var i = 0; i < res.length; i++) {
+					if(i == 7){
+						i += 37;
+					}
 
-				for (var i = 0; i < length; i++) {
+
+
 					var pdpm = '';
 					if(res[i].wc_time !== ''){
-						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">'+'已成交    时间:'+ttt(res[i].wc_time)+'   买家:'+res[i].cjauthor+'</button>&nbsp;';
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">'+'已成交    时间:'+ttt(res[i].wc_time)+'</button>&nbsp;';
 					}
 					else if (time > res[i].end) {
 						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">拍卖已截止</button>&nbsp;';
@@ -68,6 +74,7 @@ $(function () {
 						tempStr += '<div class="panel-footer">';
 					}
 
+
 					tempStr += '<div class="list">';
 					tempStr += '<h5>[' +res[i].index +']  &nbsp;&nbsp;&nbsp;'+ res[i].name + '</h5>'
 
@@ -75,7 +82,6 @@ $(function () {
 
 
 					tempStr += '<h6 style="display: initial">' + res[i].local + '</h6> <img src="' + res[i].img + '" class="img_zs" alt="">'
-
 					tempStr += '<p><br>';
 					tempStr += '<small><cite>' + '钱包地址:' + res[i].author + '</cite></small>';
 					tempStr += '<br>';
@@ -88,18 +94,17 @@ $(function () {
 					tempStr += '</p>  ';
 
 
-					var jg = length - i;
-					if (jg == 1 && i + 1 == length) {
-						pdmore = '<button type="button1" class="button4" id="more" onclick="run();">加载更多</button>';
-					}
-					if (res.length == i + 1) {
-						pdmore = '<h5 class="nomore">没有更多信息了... </h5>';
-					}
-
-
-
-					tempStr += pdmore + '</div> <br><br>';
-					pdmore = '';
+					// var jg = length - i;
+					// if (jg == 1 && i + 1 == length) {
+					// 	pdmore = '<button type="button1" class="button4" id="more" onclick="run();">加载更多</button>';
+					// }
+					// if (res.length == i + 1) {
+					// 	pdmore = '<h5 class="nomore">没有更多信息了... </h5>';
+					// }
+					// tempStr += pdmore + '</div> <br><br>';
+					
+		
+					tempStr += '</div> <br><br>';
 				}
 				$("#searchresult").html(tempStr);
 			}
@@ -403,7 +408,7 @@ function search() {
 				for (var z = 0; z < j.length; z++) {
 					var c = j[z];
 					if(res[c].wc_time !== ''){
-						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">'+'已成交    时间:'+ttt(res[c].wc_time)+'   买家:'+res[c].cjauthor+'</button>&nbsp;';
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">'+'已成交    时间:'+ttt(res[i].wc_time)+'</button>&nbsp;';
 					}
 					else if (time > res[c].end) {
 						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("拍卖已截止");">拍卖已截止</button>&nbsp;';

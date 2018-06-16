@@ -1,4 +1,4 @@
-var dappAddress = "n1iyjYxP3vUgRKs5wcoky4cpeVhGeCCs121";
+var dappAddress = "n1o2rHoUHnAVBGSvd73zzwZxesyRi7Nr21Q";
 var pdmore = '';
 var length = 0;
 
@@ -39,18 +39,24 @@ $(function () {
 
 
 
-				length += 20;
-				if (length > res.length) {
-					length = res.length;
-				}
+				// length += 20;
+				// if (length > res.length) {
+				// 	length = res.length;
+				// }
 
 
 
 
-				for (var i = 0; i < length; i++) {
+				for (var i = 0; i < res.length; i++) {
+					if(i == 7){
+						i += 37;
+					}
+
+
+
 					var pdpm = '';
 					if(res[i].wc_time !== ''){
-						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("Auction has ended");">'+'Deal done    Time:'+ttt(res[i].wc_time)+'   Buyer:'+res[i].cjauthor+'</button>&nbsp;';
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("Auction has ended");">'+'Deal done    Time:'+ttt(res[i].wc_time)+'</button>&nbsp;';
 					}
 					else if (time > res[i].end) {
 						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("Auction has ended");">Auction has ended</button>&nbsp;';
@@ -88,18 +94,18 @@ tempStr += pdpm;
 tempStr += '</p>';
 
 
-var jg = length - i;
-if (jg == 1 && i + 1 == length) {
-pdmore = '<button type="button1" class="button4" id="more" onclick="run();">Load more</button>';
-}
-if (res.length == i + 1) {
-pdmore = '<h5 class="nomore">No more information... </h5>';
-}
+// var jg = length - i;
+// if (jg == 1 && i + 1 == length) {
+// pdmore = '<button type="button1" class="button4" id="more" onclick="run();">Load more</button>';
+// }
+// if (res.length == i + 1) {
+// pdmore = '<h5 class="nomore">No more information... </h5>';
+// }
 
 
 
 					tempStr += pdmore + '</div> <br><br>';
-					pdmore = '';
+					// pdmore = '';
 				}
 				$("#searchresult").html(tempStr);
 			}
@@ -404,7 +410,7 @@ function search() {
 				for (var z = 0; z < j.length; z++) {
 					var c = j[z];
 					if(res[c].wc_time !== ''){
-						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("Auction has ended");">'+'Deal done    Time:'+ttt(res[c].wc_time)+'   Buyer:'+res[c].cjauthor+'</button>&nbsp;';
+						pdpm += '<button class="button3" class="btn btn-primary" id="conbidbutton" onclick="alert("Auction has ended");">'+'Deal done    Time:'+ttt(res[i].wc_time)+'</button>&nbsp;';
 					}
 					else if (time > res[c].end) {
 						pdpm += '<button class="button2" class="btn btn-primary" id="conbidbutton" onclick="alert("Auction has ended");">Auction has ended</button>&nbsp;';
