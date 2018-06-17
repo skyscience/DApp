@@ -100,7 +100,7 @@ ConstantContract.prototype = {
 
 
 	//发布赞助
-	savenew: function (title, info, img, http) {  //名称	详情	联系	地址	图片	时间
+	savenew: function (title, info, img, http) {  //名称	详情    图片    	地址
 		obj1.author = Blockchain.transaction.from; //赞助商 钱包地址
 		obj1.value = Blockchain.transaction.value;	 //赞助金额
 		obj1.title = title;	//名称
