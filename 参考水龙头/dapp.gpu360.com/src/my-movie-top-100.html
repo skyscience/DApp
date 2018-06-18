@@ -1,0 +1,199 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/promise-polyfill/promise-polyfill-lite.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<!-- <script src="../neb.js/index.js"></script> -->
+<dom-module id="movie-top-100">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+    <custom-style>
+      <style is="custom-style">
+        .flex-equal-justified {
+          @apply --layout-horizontal;
+          @apply --layout-justified;
+          @apply --layout-center;
+        }
+      </style>
+    </custom-style>
+
+    <div class="card">
+      <h1>电影排行榜</h1>
+    </div>
+    <iron-ajax id="ajaxCall" url="https://mainnet.nebulas.io/v1/user/call" method="post" body="[[body]]" content-type="application/json" handle-as="json" on-response="_handleResponse"></iron-ajax>
+    <template is="dom-repeat" items="[[_toArray(result)]]">
+      <div class="card container flex-equal-justified">
+        <dev class="circle ">{{plusone(index)}}</dev>
+        <dev>{{item.name}}</dev>
+        <div>
+          <paper-button raised="" on-tap="_handleTap" data-item$="[[item.name]]">favorite</paper-button>
+        </div>
+      </div>
+    </template>
+    <div class="card container flex-equal-justified">
+      <dev class="circle ">?</dev>
+      <iron-input auto-validate="">
+        <input id="inputName" pattern="\d{3}" placeholder="MOVIE NAME">
+      </iron-input>
+      <paper-button raised="" on-tap="_handleAdd">Add</paper-button>
+    </div>
+    
+  </template>
+
+
+  <script>function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return right[Symbol.hasInstance](left); } else { return left instanceof right; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!_instanceof(instance, Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.getPrototypeOf || function _getPrototypeOf(o) { return o.__proto__; }; return _getPrototypeOf(o); }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } _setPrototypeOf(subClass.prototype, superClass && superClass.prototype); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var MovieTOP100 =
+/*#__PURE__*/
+function (_Polymer$Element) {
+  _inherits(MovieTOP100, _Polymer$Element);
+
+  _createClass(MovieTOP100, null, [{
+    key: "is",
+    get: function get() {
+      return 'movie-top-100';
+    }
+  }]);
+
+  function MovieTOP100() {
+    var _this;
+
+    _classCallCheck(this, MovieTOP100);
+
+    _this = _possibleConstructorReturn(this, (MovieTOP100.__proto__ || Object.getPrototypeOf(MovieTOP100)).call(this));
+    _this.to = "n1x1USW2ZB9VJTBwJTv9cBbTY54YoSKkji7";
+    _this.value = 0.000001;
+    return _this;
+  }
+
+  _createClass(MovieTOP100, [{
+    key: "_handleResponse",
+    value: function _handleResponse(e, request) {
+      this.result = JSON.parse(request.response.result.result);
+    }
+  }, {
+    key: "_vote",
+    value: function _vote(title, value) {
+      window.postMessage({
+        "target": "contentscript",
+        "data": {
+          "to": this.to,
+          "value": value,
+          "contract": {
+            //"contract" is a parameter used to deploy a contract or call a smart contract function
+            "function": "vote",
+            "args": "[\"" + title.trim() + "\"]"
+          }
+        },
+        "method": "neb_sendTransaction"
+      }, "*");
+    }
+  }, {
+    key: "_handleAdd",
+    value: function _handleAdd(event) {
+      this._vote(this.$.inputName.value, this.value);
+
+      this.$.inputName.value = "";
+    }
+  }, {
+    key: "_handleTap",
+    value: function _handleTap(event) {
+      var item = event.target.dataset.item;
+
+      this._vote(item, this.value);
+    }
+  }, {
+    key: "plusone",
+    value: function plusone(num) {
+      return num + 1;
+    }
+  }, {
+    key: "ready",
+    value: function ready() {
+      var _this2 = this;
+
+      _get(MovieTOP100.prototype.__proto__ || Object.getPrototypeOf(MovieTOP100.prototype), "ready", this).call(this);
+
+      window.addEventListener('message', function (e) {
+        console.log("message received, msg.data: " + JSON.stringify(e.data));
+
+        if (!!e.data.data.txhash) {
+          console.log("Transaction hash:\n" + JSON.stringify(e.data.data.txhash, null, '\t'));
+        }
+      });
+      this.body = {
+        "from": "n1NrqHkmuFAHsifysfBh6gombgeg6wJrfnB",
+        "to": this.to,
+        "value": "0",
+        "nonce": 3,
+        "gasPrice": "1000000",
+        "gasLimit": "2000000",
+        "contract": {
+          "function": "info",
+          "args": ""
+        }
+      };
+      this.$.ajaxCall.generateRequest();
+      setInterval(function () {
+        _this2.$.ajaxCall.generateRequest();
+      }, 5 * 1000);
+    }
+  }, {
+    key: "_toArray",
+    value: function _toArray(obj) {
+      var arr = Object.keys(obj).map(function (key) {
+        return {
+          name: key,
+          value: obj[key]
+        };
+      });
+      arr = arr.sort(function (a, b) {
+        return b.value - a.value;
+      });
+      return arr;
+    }
+  }]);
+
+  return MovieTOP100;
+}(Polymer.Element);
+
+window.customElements.define(MovieTOP100.is, MovieTOP100);</script>
+</dom-module>
