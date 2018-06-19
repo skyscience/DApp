@@ -77,7 +77,8 @@ h1,h2, h4, h5, h6 {
     height: 39px;
     margin-bottom: 13px;
     margin-top: 7%;
-    position: absolute;
+	position: absolute;
+	color: #000;
 }
 
 

@@ -4,8 +4,49 @@ $(function () {
 	var nebpay = new NebPay();
 
 
-	//列表
+	//第一次领取
+	$("#up").click(function () {
+		var address = $("#inputAddress").val();
+		if (address.length != 35) {
+			alert("Invalid wallet address!");
+		}
+
+
+
+
+		document.getElementById("ajaxCallApplication").url = "http://dapp.gpu360.com:8082/application";
+		document.getElementById("ajaxCallApplication").params = {
+
+			// "walletAddress": this.$.inputAddress.value
+			"walletAddress": document.getElementById("inputAddress")
+
+		}; alert("OK"+document.getElementById("ajaxCallApplication").url);
+		document.getElementById("ajaxCallApplication").generateRequest();
+
+	});
+
+	/*
+	 if (this.$.inputAddress.value.length != 35) {
+              alert("Invalid wallet address!");
+            }
+
+
+            this.$.ajaxCallApplication.url = "http://dapp.gpu360.com:8082/application";
+            this.$.ajaxCallApplication.params = {
+              "walletAddress": this.$.inputAddress.value
+            };
+            this.$.ajaxCallApplication.generateRequest();
+	
+	
+	
+	
+	
+	
+	
+	
+	//第一次领取
 	$("#up").click(function ()  {
+
 		var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 		var nebpay = new NebPay();
 		var address = $("#address").val(); //地址
@@ -21,9 +62,10 @@ $(function () {
 				}
 			}
 		})
-	});
-	
-	$("#ups").click(function ()  {
+	}); */
+
+
+	$("#ups").click(function () {
 		var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
 		var nebpay = new NebPay();
 		var address = $("#address").val(); //地址

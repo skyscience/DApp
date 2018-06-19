@@ -1,9 +1,8 @@
 "use strict";
-//[ 6/19 21:08 ] 修正
+//[ 6/19 9:54 ] 修正
 //[ 测试网 ] 
-//Hash:  81022a189604d88f86beb0d3ba0082b4eaf258700da927d57f6b60327117dd49
-//合约:  n1jZvBbnNSEYiDkGT8tHFbXMk7apnVfN8kc
-//部署钱包:  n1JJ8FKGy1kNvna4RTuQyVRcaeV5KLgD8rK  	(咱们团队的)
+//Hash:  
+//合约:  
 
 
 //创建 赞助信息类
@@ -111,7 +110,7 @@ StartContract.prototype = {
 			throw new Error("author rec2."); //已经领取过啦
 		}
 		var money = this.rec2;//初始化领取金额
-		if (this.rec2max > this.balance) {//比大小
+		if (this.rec2max.gt(this.balance)) {//用了个.gt比大小
 			money = this.balance * this.rec2per;
 		}
 
@@ -180,7 +179,7 @@ StartContract.prototype = {
 		var author = Blockchain.transaction.from;
 		var money = new BigNumber(value * 1e18);
 		if (author == this.owner) {
-			if (money > this.balance) {
+			if (money.gt(this.balance)) {
 				throw new Error("奖池金额仅剩" + this.balance * 1e-18 + "NAS");
 			} else {
 				//更新钱包
@@ -263,6 +262,5 @@ StartContract.prototype = {
 		}
 	},
 };
-
-
 module.exports = StartContract;
+
