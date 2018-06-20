@@ -17,7 +17,9 @@ a:active {
 	clear:both;
 }
 
-
+img{
+	border-radius: 10px;
+}
  
 .container {
 	padding:0 20px 0 20px;
@@ -30,6 +32,11 @@ a:active {
 	padding:0;
 }
 /* ==============魔改区域============ */
+
+h5{
+	color: rgb(224, 221, 38);
+}
+
 
 .info{
 	background-color: rgb(49, 49, 49);
@@ -47,7 +54,7 @@ a:active {
     margin-bottom: 24%;
     border-radius: 32px;
     color: rgb(255, 255, 255);
-    padding: 5% 0px 11% 4%;
+    padding: 5% 34px 11% 4%;
     margin-left: 19%;
     width: 66%;
 }

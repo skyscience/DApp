@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 
 
 <head>
@@ -11,8 +11,10 @@
 	<!-- css -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/index_style.css" rel="stylesheet" />
-
 	<link rel="import" href="./gpu360/bower_components/iron-ajax/iron-ajax.html">
+
+	<link rel="stylesheet" href="css/ts/demo.css">
+	<link rel="stylesheet" href="css/ts/avgrund.css">
 
 
 	<!-- 圆形图表 -->
@@ -22,16 +24,28 @@
 	<script src="./js/index.js"></script>
 	<script src="./js/nebPay.js"></script>
 
+
+	<!-- 弹窗 -->
+	<link rel="stylesheet" href="css/ts/avgrund.css">
+	<script language="javascript">
+		function openDialog() {
+			Avgrund.show("#default-popup");
+
+		}
+		function closeDialog() {
+			Avgrund.hide();
+		}
+	</script>
+
+
 </head>
 
 
 
 
-<body style="background-color: #000000">
-		
-	<div id="wrapper">
+<body style="background-color: #000000" style="height: 100%;">
 
-			
+	<div id="wrapper">
 
 
 		<!-- 页头 -->
@@ -59,8 +73,8 @@
 								<a href="sponsor.html">赞助</a>
 							</li>
 							<li>
-									<a href="donate.html">捐助</a>
-								</li>
+								<a href="donate.html">捐助</a>
+							</li>
 							<li>
 								<a href="help.html">帮助</a>
 							</li>
@@ -76,29 +90,51 @@
 
 
 
-		
+
 		<!-- 内容区域 -->
-		<section id="content"
-		style="
+		<section id="content" style="
 		background-image:url(./img/bg5.jpg);
 		background-repeat:no-repeat; 
 		background-attachment:fixed;  
 		background-size: 100%;
 	">
-	<div id="particles-js" style="width: 1672px;height: 835px;position:  absolute;"></div>
-
-
-
+			<div id="particles-js" style="width: 1672px;height: 835px;position:  absolute;"></div>
 			<div class="container">
 
-					
+
 				<!-- 数据图表 -->
-				<div class="info">
+				<div class="info" >
+						
+
 					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">数据</h3>
+
+
+					<button onClick="javascript:openDialog();">点击提示</button>
+
+
 					<div class="circlechart" data-percentage="-20">-20%</div>
 					<div class="circlechart" data-percentage="30">30%</div>
 					<div class="circlechart" data-percentage="85">85%</div>
 				</div>
+
+
+		
+
+
+			<!-- 提示内容区域 -->
+			<aside id="default-popup" class="avgrund-popup" 
+			style="
+				position: absolute;
+				left: 55%;
+				margin-top: -69%;"
+			>
+			<h2>弹出提示：</h2>
+			<button onClick="javascript:closeDialog();">Close</button>
+			</aside>
+
+				<!-- 点击空白处关闭弹窗 -->
+				<div class="avgrund-cover"></div>
+
 
 
 
@@ -276,8 +312,8 @@
 	<iron-ajax id="ajaxCall" url="[[nasurl]]" method="post" body="[[reqInfo]]" content-type="application/json" handle-as="json"
 	 on-response="_handlerInfo"></iron-ajax>
 	<iron-ajax id="ajaxCallApplication" method="GET" handle-as="text" on-response="_handlerApplication" on-error="on_ajax_err"></iron-ajax>
-
-
+	<!-- 提示 -->
+	<script type="text/javascript" src="js/ts_index.js"></script>
 
 </body>
 
