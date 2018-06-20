@@ -165,6 +165,12 @@ a:active {
     position: absolute;
 }
 
+.ts{
+	border: 8px;
+	border-style: double;
+	width: 94%;
+}
+
 
 
 

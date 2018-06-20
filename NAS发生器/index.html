@@ -27,10 +27,11 @@
 
 
 
-<body>
+<body style="background-color: #000000">
+		
 	<div id="wrapper">
 
-
+			
 
 
 		<!-- 页头 -->
@@ -58,6 +59,12 @@
 								<a href="sponsor.html">赞助</a>
 							</li>
 							<li>
+									<a href="donate.html">捐助</a>
+								</li>
+							<li>
+								<a href="help.html">帮助</a>
+							</li>
+							<li>
 								<a href="about.html">关于</a>
 							</li>
 
@@ -69,12 +76,22 @@
 
 
 
-
+		
 		<!-- 内容区域 -->
-		<section id="content">
+		<section id="content"
+		style="
+		background-image:url(./img/bg5.jpg);
+		background-repeat:no-repeat; 
+		background-attachment:fixed;  
+		background-size: 100%;
+	">
+	<div id="particles-js" style="width: 1672px;height: 835px;position:  absolute;"></div>
+
+
+
 			<div class="container">
 
-
+					
 				<!-- 数据图表 -->
 				<div class="info">
 					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">数据</h3>
@@ -96,10 +113,7 @@
 
 
 
-			
-						
-								<!-- 钱包地址输入框 -->
-								<input id="inputAddress" pattern="\d{3}" placeholder="Wallet address">
+
 
 					<input id="address" class="dz" placeholder="请输入钱包地址">
 					<br>
@@ -254,9 +268,14 @@
 		$('.circlechart').circlechart(); // Initialization
 	</script>
 
-<iron-ajax id="ajaxCall" url="[[nasurl]]" method="post" body="[[reqInfo]]" content-type="application/json" handle-as="json"
-on-response="_handlerInfo"></iron-ajax>
-<iron-ajax id="ajaxCallApplication" method="GET" handle-as="text" on-response="_handlerApplication" on-error="on_ajax_err"></iron-ajax>
+
+	<script type="text/javascript" src="js/index_qk/particles.js"></script>
+	<script type="text/javascript" src="js/index_qk/app.js"></script>
+
+
+	<iron-ajax id="ajaxCall" url="[[nasurl]]" method="post" body="[[reqInfo]]" content-type="application/json" handle-as="json"
+	 on-response="_handlerInfo"></iron-ajax>
+	<iron-ajax id="ajaxCallApplication" method="GET" handle-as="text" on-response="_handlerApplication" on-error="on_ajax_err"></iron-ajax>
 
 
 

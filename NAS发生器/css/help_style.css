@@ -44,7 +44,7 @@ a:active {
 
 .lq {
     background-color: rgb(49, 49, 49);
-    margin-bottom: 5%;
+    margin-bottom: 24%;
     border-radius: 32px;
     color: rgb(255, 255, 255);
     padding: 5% 0px 11% 4%;
@@ -160,12 +160,10 @@ a:active {
 	border: 0;
 	font-size: 14px;
 	cursor: pointer;
-	margin: 0.4% 0% 0% 3%;
+	margin: 3% 0% 0% 18%;
     width: 13%;
     position: absolute;
 }
-
-
 
 
 
