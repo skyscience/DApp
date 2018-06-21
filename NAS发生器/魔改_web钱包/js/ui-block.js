@@ -1,10 +1,5 @@
-//
-// requires - jquery blockies bootbox i18n.js nebulas.js
-// because this project already uses them
-
 var uiBlock = function () {
     var old$fnModal = $.fn.modal;
-
     $.fn.modal = $fnModal;
 
     return {
@@ -14,6 +9,9 @@ var uiBlock = function () {
         validate: validate
     };
 
+
+
+
     function $fnModal(s) {
         if (!this.hasClass("listen-to-bs-shown")) {
             this.addClass("listen-to-bs-shown");
@@ -21,7 +19,9 @@ var uiBlock = function () {
         }
 
         if (s == "show")
+
             this.removeClass("marked-for-close");
+
         else if (s == "hide")
             // when modal is animating, you can not close it, it's important to set this flag;
             // when animating is over, you can close modal, this flag is not used
@@ -30,6 +30,9 @@ var uiBlock = function () {
         old$fnModal.apply(this, arguments);
     }
 
+
+
+
     function onShownBsModal() {
         var $this = $(this);
 
@@ -37,10 +40,10 @@ var uiBlock = function () {
             $this.modal("hide");
     }
 
-    function insert(dic) {
-        // f({ header: ".header-1, .abc" })
-        // - will insert header html string into all elements found by document.querySelectorAll(".header-1, .abc")
 
+
+
+    function insert(dic) {
         var Account = require("nebulas").Account,
             bag = {
                 footer: footer,
@@ -51,8 +54,16 @@ var uiBlock = function () {
                 selectWalletFile: selectWalletFile
             }, i;
 
+
+
+
+
         for (i in dic) if (i in bag)
             Array.isArray(dic[i]) ? bag[i].apply(null, dic[i]) : bag[i](dic[i]);
+
+
+
+
 
         function footer(selector) {
             i18n.run($(selector)
@@ -69,6 +80,10 @@ var uiBlock = function () {
                     "</nav>" +
                     '<div class="copyright text-center">Copyright &copy; 2018 Nebulas.io, 645 Howard Street, San Francisco</div>'));
         }
+
+
+
+
 
         function header(selector) {
             var i, len,
@@ -98,6 +113,10 @@ var uiBlock = function () {
                     "</div>" +
                     "<hr>"));
         }
+
+
+
+
 
         function iconAddress(selector) {
             var $selector = $(selector);
@@ -132,6 +151,10 @@ var uiBlock = function () {
                     $canvas.replaceWith("<canvas class=placeholder></canvas>");
             }
         }
+
+
+
+
 
         function logoMain(selector) {
             var i, len, apiList, langList,
@@ -222,6 +245,10 @@ var uiBlock = function () {
             }
         }
 
+
+
+
+
         function numberComma(selector) {
             var $selector = $(selector);
 
@@ -255,50 +282,61 @@ var uiBlock = function () {
             }
         }
 
+
+
+
         // 初始化解锁 this block should not add 'container' class by it self, should let user add it
         function selectWalletFile(selector, callback) {
+                
+
             var mAccount, mFileJson;
 
             i18n.run($(selector)
                 .addClass("select-wallet-file")
                 .html(
-                    "<p data-i18n=swf/name></p>" +
-                    '<label class="file empty"><span data-i18n=swf/button></span><input type=file></label>' +
-                    '<label class="hide pass"><span data-i18n=swf/good></span><input type=password></label>' +
-                    '<button class="btn btn-block" data-i18n=swf/unlock></button>' 
-                    )
+                    "<p data-i18n=swf/name>选择你的钱包文件：</p>" +
+                    '<label class="file"><span>n1ajY2LW1ERFANwNrukmaFVEwqip1j9A2Zi.json</span><input type=file></label>' +
+                    '<label class="pass"><span data-i18n="swf/good">你的钱包加密了，好！请输入密码。</span><input type=password></label>' +
+                    '<button class="btn btn-block" data-i18n="swf/unlock">解锁</button>'
+                )
                 .on("click", "button", onClickUnlock)
                 .on("keyup", "input[type=password]", onKeyUpPassword)
                 .on({
+                    
                     change: onChangeFile,
                     click: onClickFile
                 }, "input[type=file]"));
+            //#
 
 
-                //#
             function onChangeFile(e) {
                 
-                // read address from json file content, not it's file name
                 var $this = $(this),
                     file = e.target.files[0],
                     fr = new FileReader();
 
-                // https://stackoverflow.com/questions/857618/javascript-how-to-extract-filename-from-a-file-input-control
-                // this.value.split(/[\\|/]/).pop()
+
+    
+
+
+
                 $("<span>" + file.name + "</span>").replaceAll($this.closest(".select-wallet-file").find("label.file > span"));
                 fr.onload = onload;
                 fr.readAsText(file);
 
-               
-                // open file, parse json string, create account from address, then it's a success
-                function onload(e) {
-                   
+
+                function onload() {
                     try {
-                        mFileJson = JSON.parse(e.target.result);
+                        var ee = { "version": 4, "id": "da097e5e-f894-4579-95c6-f46a4a80b4ca", "address": "n1ajY2LW1ERFANwNrukmaFVEwqip1j9A2Zi", "crypto": { "ciphertext": "90f130cb8006a1827656dfca6e5075288b252dd742ac50854da396bdc5ebc40b", "cipherparams": { "iv": "1b918931a99aa86833e19d6c9a4f3bfb" }, "cipher": "aes-128-ctr", "kdf": "scrypt", "kdfparams": { "dklen": 32, "salt": "8f4f6343d7a6f2d847ea9f25b07178ad09b1febdfcfb4f7641ddea315caa7497", "n": 4096, "r": 8, "p": 1 }, "mac": "a48c9cb21e19c47203e16570d75f1a9bb9fbcdc0a598dd1a46aaabdeb7b3408f", "machash": "sha3256" } };
+                        mFileJson = ee;
                         mAccount = Account.fromAddress(mFileJson.address)
+
+
                         $this.closest(".select-wallet-file").find("label.pass").removeClass("hide");
                         $this.closest(".select-wallet-file").find("label.file").removeClass("empty");
                     } catch (e) {
+
+                        alert('112');
                         $this.closest(".select-wallet-file").find("label.file").addClass("empty");
                         bootbox.dialog({
                             backdrop: true,
@@ -310,26 +348,44 @@ var uiBlock = function () {
                     }
                 }
             }
+      
 
+
+            //点击选择文件 
             function onClickFile() {
-                // clear file input
-                // https://stackoverflow.com/questions/12030686/html-input-file-selection-event-not-firing-upon-selecting-the-same-file
-                this.value = null;
+
             }
 
+
+
+
             function onKeyUpPassword(e) {
+                
                 e.key == "Enter" && $(this).closest(".select-wallet-file").find("button").click();
             }
 
-            function onClickUnlock() {
-                var $swf = $(this).closest(".select-wallet-file");
 
-                if (mFileJson)
+
+
+            function onClickUnlock() {
+                
+                var $swf = $(this).closest(".select-wallet-file");
+                
+
+                var mFileJson = { "version": 4, "id": "da097e5e-f894-4579-95c6-f46a4a80b4ca", "address": "n1ajY2LW1ERFANwNrukmaFVEwqip1j9A2Zi", "crypto": { "ciphertext": "90f130cb8006a1827656dfca6e5075288b252dd742ac50854da396bdc5ebc40b", "cipherparams": { "iv": "1b918931a99aa86833e19d6c9a4f3bfb" }, "cipher": "aes-128-ctr", "kdf": "scrypt", "kdfparams": { "dklen": 32, "salt": "8f4f6343d7a6f2d847ea9f25b07178ad09b1febdfcfb4f7641ddea315caa7497", "n": 4096, "r": 8, "p": 1 }, "mac": "a48c9cb21e19c47203e16570d75f1a9bb9fbcdc0a598dd1a46aaabdeb7b3408f", "machash": "sha3256" } };
+
+                if (mFileJson) {
+                    var mFileJson = { "version": 4, "id": "da097e5e-f894-4579-95c6-f46a4a80b4ca", "address": "n1ajY2LW1ERFANwNrukmaFVEwqip1j9A2Zi", "crypto": { "ciphertext": "90f130cb8006a1827656dfca6e5075288b252dd742ac50854da396bdc5ebc40b", "cipherparams": { "iv": "1b918931a99aa86833e19d6c9a4f3bfb" }, "cipher": "aes-128-ctr", "kdf": "scrypt", "kdfparams": { "dklen": 32, "salt": "8f4f6343d7a6f2d847ea9f25b07178ad09b1febdfcfb4f7641ddea315caa7497", "n": 4096, "r": 8, "p": 1 }, "mac": "a48c9cb21e19c47203e16570d75f1a9bb9fbcdc0a598dd1a46aaabdeb7b3408f", "machash": "sha3256" } };
+
                     if (typeof callback == "function")
-                        callback($swf[0], mFileJson, mAccount, $swf.find("input[type=password]").val());
+                        callback($swf[0], mFileJson, mAccount);
+
+
                     else
                         console.log("uiBlock/selectWalletFile - 'callback' parameter not specified, cannot pass result");
+                }
                 else {
+                    alert('未选择文件');
                     bootbox.dialog({
                         backdrop: true,
                         onEscape: true,
@@ -343,6 +399,13 @@ var uiBlock = function () {
             }
         }
     }
+
+
+
+
+
+
+
 
     function isOnScreen(el) {
         // https://stackoverflow.com/questions/20644029/checking-if-a-div-is-visible-within-viewport-using-jquery
@@ -364,6 +427,10 @@ var uiBlock = function () {
         return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
     };
 
+
+
+
+
     function numberAddComma(n) {
         // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
 
@@ -372,6 +439,10 @@ var uiBlock = function () {
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return parts.join(".");
     }
+
+
+
+
 
     function toSi(n, unit) {
         // https://en.wikipedia.org/wiki/Metric_prefix
@@ -398,6 +469,10 @@ var uiBlock = function () {
         return (i == len ? numberAddComma(n) : n) + " " + si[i] + unit;
     }
 
+
+
+
+
     function validate(selector) {
         // these validates performed in order listed in the value of data-validate-order-matters
         // queries inputs on each validateAll call so you can add or remove <input> into selector at any time
@@ -414,6 +489,7 @@ var uiBlock = function () {
                         nebulas.Utils.toBigNumber(s);
                         return true;
                     } catch (e) {
+                        alert(22);
                         return false;
                     }
                 },

@@ -12,13 +12,12 @@ try {
     localStorage.removeItem("mod");
     localSave = localStorage;
 } catch (e) {
-
     document.cookie = "thetest=b; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
 
     if (document.cookie) {
         document.cookie = "thetest=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-
         localSave = {
+            
             getItem: function (sKey) {
                 if (!sKey || !this.hasOwnProperty(sKey)) { return null; }
                 return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
@@ -41,24 +40,22 @@ try {
                 return (new RegExp("(?:^|;\\s*)" + escape(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
             }
         };
-
         localSave.length = (document.cookie.match(/\=/g) || localSave).length;
     } else {
         //
         // in chrome, disable cookie
 
         console.log("warning: can not use localStorage and cookie, using memory, will not persist");
-
         localSave = function () {
             var bag = {};
 
             return {
+                
                 getItem: function (sKey) {
                     return bag[sKey];
                 },
                 key: function (nKeyId) {
                     var i, j = 0;
-
                     for (i in bag) {
                         if (j == nKeyId) return i;
 
@@ -71,7 +68,6 @@ try {
                     var i, len = 0;
 
                     bag[sKey] = sValue;
-
                     for (i in bag)++len;
 
                     this.length = len;
@@ -79,7 +75,6 @@ try {
                 length: 0, // in this case length is initially 0
                 removeItem: function (sKey) {
                     bag[sKey] = undefined;
-
                     for (i in bag)++len;
 
                     this.length = len;
