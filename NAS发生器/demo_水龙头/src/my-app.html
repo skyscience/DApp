@@ -1,0 +1,225 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="my-icons.html">
+
+<link rel="lazy-import" href="my-view1.html">
+<link rel="lazy-import" href="my-view2.html">
+<link rel="lazy-import" href="my-view3.html">
+<link rel="lazy-import" href="my-movie-top-100.html">
+<link rel="lazy-import" href="my-grid-99.html">
+<link rel="lazy-import" href="my-chatroom.html">
+<link rel="lazy-import" href="my-watertap.html">
+<link rel="lazy-import" href="my-view404.html">
+<link rel="lazy-import" href="my-book-top.html">
+
+<dom-module id="my-app">
+  <template>
+    <style>
+      :host {
+        --app-primary-color: #E00032;
+        --app-secondary-color: black;
+
+        display: block;
+      }
+
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
+      app-header {
+        color: #fff;
+        background-color: var(--app-primary-color);
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+      }
+
+      .drawer-list a.iron-selected {
+        color: black;
+        font-weight: bold;
+      }
+    </style>
+    <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+    </app-location>
+
+    <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
+    </app-route>
+
+    <app-drawer-layout fullbleed="" narrow="{{narrow}}">
+      <!-- Drawer content -->
+      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+        <app-toolbar>Menu</app-toolbar>
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+          <!-- <a name="view1" href="[[rootPath]]view1.html">View One</a>
+          <a name="view2" href="[[rootPath]]view2.html">View Two</a>
+          <a name="view3" href="[[rootPath]]view3.html">View Three</a> -->
+          <a name="watertap" href="[[rootPath]]watertap.html">Watertap</a>
+          <a name="movie-top-100" href="[[rootPath]]movie-top-100.html">电影排行榜</a>
+          <a name="chatroom" href="[[rootPath]]chatroom.html">留言板</a>
+          <a name="grid-99" href="[[rootPath]]grid-99.html">99个格子</a>
+          <a name="forecast" href="[[rootPath]]forecast.html">预测市场</a>
+          <a name="book-top" href="[[rootPath]]book-top.html">人生必读书籍</a>
+        </iron-selector>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region="">
+
+        <app-header slot="header" condenses="" reveals="" effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
+            <div>Zroad Dapps Based On Nebulas </div>
+          </app-toolbar>
+          <marquee style="color:rgb(73,73,73);font-family:simsun;font-size:14px;line-height:21px;" onmouseover="URL">
+              <a href="../watertap.html" style="text-decoration:none;color:rgb(60,132,189);" target="_blank">
+              <span style="font-family:'simsun';font-size:10px;color:		#FFFFFF;"><strong>"NAS水龙头"现已上线,您可以免费领取一定数量的NAS用于发布或调用合约,点我查看详情</strong>
+              <!--<span style="font-family:'simsun';font-size:10px;color:#FFFAFA;"><strong>"NAS WATERTAP" is online now, you can get a certain amount of NAS for deploying or calling contracts, click to see more details.</strong>-->
+              </span></a></marquee>
+        </app-header>
+
+        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
+          <movie-top-100 name="movie-top-100"></movie-top-100>
+          <chat-room name="chatroom"></chat-room>
+          <water-tap name="watertap"></water-tap>
+          <grid-99 name="grid-99"></grid-99>
+          <my-view404 name="view404"></my-view404>
+          <my-forecast name="forecast"></my-forecast>
+          <book-top name="book-top"></book-top>
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+  </template>
+
+  <script>function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return right[Symbol.hasInstance](left); } else { return left instanceof right; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!_instanceof(instance, Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } _setPrototypeOf(subClass.prototype, superClass && superClass.prototype); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// Gesture events like tap and track generated from touch will not be
+// preventable, allowing for better scrolling performance.
+Polymer.setPassiveTouchGestures(true);
+
+var MyApp =
+/*#__PURE__*/
+function (_Polymer$Element) {
+  _inherits(MyApp, _Polymer$Element);
+
+  function MyApp() {
+    _classCallCheck(this, MyApp);
+
+    return _possibleConstructorReturn(this, (MyApp.__proto__ || Object.getPrototypeOf(MyApp)).apply(this, arguments));
+  }
+
+  _createClass(MyApp, [{
+    key: "_routePageChanged",
+    value: function _routePageChanged(page) {
+      // If no page was found in the route data, page will be an empty string.
+      // Default to 'view1' in that case.
+      this.page = page || 'watertap'; // Close a non-persistent drawer when the page & route are changed.
+
+      if (!this.$.drawer.persistent) {
+        this.$.drawer.close();
+      }
+    }
+  }, {
+    key: "_pageChanged",
+    value: function _pageChanged(page) {
+      // Load page import on demand. Show 404 page if fails
+      var resolvedPageUrl = this.resolveUrl('my-' + page + '..html');
+      Polymer.importHref(resolvedPageUrl, null, this._showPage404.bind(this), true);
+    }
+  }, {
+    key: "_showPage404",
+    value: function _showPage404() {
+      this.page = 'view404';
+    }
+  }], [{
+    key: "is",
+    get: function get() {
+      return 'my-app';
+    }
+  }, {
+    key: "properties",
+    get: function get() {
+      return {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        },
+        routeData: Object,
+        subroute: Object,
+        // This shouldn't be neccessary, but the Analyzer isn't picking up
+        // Polymer.Element#rootPath
+        rootPath: String
+      };
+    }
+  }, {
+    key: "observers",
+    get: function get() {
+      return ['_routePageChanged(routeData.page)'];
+    }
+  }]);
+
+  return MyApp;
+}(Polymer.Element);
+
+window.customElements.define(MyApp.is, MyApp);</script>
+  <style>
+      #test
+      {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          width: 130px;
+          height: 60px;
+          background: #555;
+          color: #fff;
+          font-size: 13px;
+      }
+  </style>
+</dom-module>

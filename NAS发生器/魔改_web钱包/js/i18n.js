@@ -1,3 +1,12 @@
+//
+// i18n.run()
+// - $("[data-i18n]").each((el.type == input, textarea ? el.placeholder : el.innerHTML) = table[lang][el.attr(data-i18n)])
+//
+// requires jquery
+//
+// this file is mainly a big table
+// calls i18n.run() at bottom of this file
+
 "use strict";
 
 var i18n = function () {

@@ -1,6 +1,4 @@
-alert('bbvcz');
 function checkEmail(email) {
-    alert('12');
     var emailRegex = /[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+/g;
     var isEmail = email.match(emailRegex);
     isEmail = isEmail && isEmail.length > 0;
@@ -14,11 +12,7 @@ function checkEmail(email) {
     return isEmail;
 }
 
-
-
-
 function checkWallet(wallet) {
-    alert('22');
     var walletRegex = /(0x)?[\w]{48}/g;
     var isWallet = wallet.match(walletRegex);
     isWallet = isWallet && isWallet.length > 0;
@@ -32,12 +26,8 @@ function checkWallet(wallet) {
     return isWallet;
 }
 
-
-
-
 $(function () {
     $('#frmToken').on("submit", function (e) {
-        alert('32');
         e.preventDefault();
 
         var email = $('#tokEmail').val();
@@ -66,11 +56,7 @@ $(function () {
         }
     });
 
-
-
-
     $('#frmState').on("submit", function (e) {
-        alert('42');
         e.preventDefault();
 
         var wallet = $("#stWallet").val();
