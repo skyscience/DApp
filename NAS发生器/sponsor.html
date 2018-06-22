@@ -11,6 +11,10 @@
 	<!-- css -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/sponsor_style.css" rel="stylesheet" />
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/index.js"></script>
+	<script src="./js/nebPay.js"></script>
 </head>
 
 
@@ -73,7 +77,7 @@
 		background-attachment:fixed;  
 		background-size: 100%;
 		">
-			<div class="container">
+		<div class="container">
 
 
 
@@ -81,17 +85,16 @@
 						<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">赞助</h3>
 						
 						<h4>描述</h4>
-						<input id="" class=dz type="text" value="" placeholder="标题"><br>
+						<input id="name" class=dz type="text" value="" placeholder="标题"><br>
 						<h4>描述</h4>
-						<textarea rows=4 class="dz2">
-							 </textarea>
+						<textarea id="conte" rows=4 class="dz2"></textarea>
 						<h4>图片URL</h4>
-						<input id="" class=dz type="text" value="" placeholder="http://xxx.img/photo.png"><br>
+						<input id="img" class=dz type="text" value="" placeholder="http://xxx.com/photo.png"><br>
 						<h4>链接</h4>
-						<input id="" class=dz type="text" value="" placeholder="http://xxx.com"><br>
+						<input id="url" class=dz type="text" value="" placeholder="http://xxx.com"><br>
 						<h4>赞助金额</h4>
-						<input id="" class=dz1 type="text" value="" placeholder="请输入 > 0.01 的赞助金">
-						<button id="up" class="tj">提交</button>
+						<input id="bal" class=dz1 type="text" value="" placeholder="请输入 > 0.01 的赞助金"><br>
+						<button id="saven" class="tj">提交</button>
 						
 				</div>
 
