@@ -38,6 +38,16 @@
 	</script>
 
 
+<script type="text/javascript">
+	//等待页面加载完毕 加载列表
+	// function run() {
+	// 	document.getElementById("all").click();
+	// }
+	window.onload=function(){  
+	    document.getElementById("all").click();
+	}  
+</script>
+
 </head>
 
 
@@ -46,6 +56,8 @@
 <body style="background-color: #000000" style="height: 100%;">
 
 	<div id="wrapper">
+
+
 
 
 		<!-- 页头 -->
@@ -103,8 +115,8 @@
 
 
 				<!-- 数据图表 -->
-				<div class="info" >
-						
+				<div class="info">
+
 
 					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">数据</h3>
 
@@ -118,19 +130,17 @@
 				</div>
 
 
-		
 
 
-			<!-- 提示内容区域 -->
-			<aside id="default-popup" class="avgrund-popup" 
-			style="
+
+				<!-- 提示内容区域 -->
+				<aside id="default-popup" class="avgrund-popup" style="
 				position: absolute;
 				left: 55%;
-				margin-top: -69%;"
-			>
-			<h2>弹出提示：</h2>
-			<button onClick="javascript:closeDialog();">Close</button>
-			</aside>
+				margin-top: -69%;">
+					<h2>弹出提示：</h2>
+					<button onClick="javascript:closeDialog();">Close</button>
+				</aside>
 
 				<!-- 点击空白处关闭弹窗 -->
 				<div class="avgrund-cover"></div>
@@ -153,7 +163,8 @@
 
 					<input id="address" class="dz" placeholder="请输入钱包地址">
 					<br>
-					<button id="up" class="tj">提交</button>
+					<button id="up" class="tj" >提交</button>
+					
 
 				</div>
 
@@ -163,23 +174,26 @@
 				<!-- 赞助展示 -->
 				<div class="row1">
 					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">赞助商
-													<a id="all" href="javascript:void(0)">刷新</a>
-										</h3>
+						<a id="all" href="javascript:void(0)">刷新</a> 
+
+						
+						<input id="lqcs" class="lqcs"  value="已领取 0 / 10 次" />
+					</h3>
 					<div class="skill-home">
 						<div class="skill-home-solid clearfix">
-							<div id="searchresult">
-								
-											<div class="col-md-3 text-center">
-												<span class="icons c1">
-													<i class="fa fa-trophy"></i>
-												</span>
-												<div class="box-area">
-													<h3>加载中</h3>
-													<p>长时间无响应请检查网络</p>
-												</div>
-											</div>
-											</div>
 
+
+							<!-- 接收 赞助列表 数据 -->
+							<div id="searchresult">
+									<center style="
+									color: floralwhite;
+									font-size: 20px;
+								">加载中。。。</center>
+							</div>
+
+
+<!-- 
+							下面是 4个不同的展示块
 							<div class="col-md-3 text-center">
 								<span class="icons c1">
 									<i class="fa fa-trophy"></i>
@@ -221,7 +235,7 @@
 									<h3>test1</h3>
 									<p>more......</p>
 								</div>
-							</div>
+							</div> -->
 
 
 						</div>
