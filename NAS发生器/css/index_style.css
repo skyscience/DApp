@@ -37,6 +37,23 @@ h1,h2, h4, h5, h6 {
 }
 /* ==============魔改区域============ */
 
+
+.lqcs{
+	border-radius: 5px;
+    background-color: #4560E6;
+    color: white;
+    padding: 0px 0px 0px 6px;
+    border: 0;
+    width: 21%;
+    height: 36px;
+}
+
+.col-md-3{
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
+
+
 .info{
 	background-color: rgb(49, 49, 49);
 	margin-bottom: 90px;
@@ -54,7 +71,7 @@ h1,h2, h4, h5, h6 {
     margin-top: -50px;
     border-radius: 20px;
     color: rgb(255, 255, 255);
-    padding: 4% 0px 30% 4%;
+    padding: 4% 0px 34% 4%;
 }
 
 
@@ -62,9 +79,9 @@ h1,h2, h4, h5, h6 {
 	float: right;
     background-color: rgb(253, 253, 253);
     border-radius: 20px;
-    padding: 0% 40% 27% 3%;
+    padding: 0% 40% 27% 0%;
     color: #16181D;
-    margin: -2% 2% 0% 0%;
+    margin: -7% 2% 0% 0%;
     position: static;
 }
 
@@ -73,11 +90,12 @@ h1,h2, h4, h5, h6 {
 	display: inline;
 	border-radius: 5px;
 	border: #12B362;
-	width: 295px;
+	width: 19%;
     height: 39px;
     margin-bottom: 13px;
     margin-top: 7%;
-    position: absolute;
+	position: absolute;
+	color: #000;
 }
 
 
@@ -87,7 +105,7 @@ h1,h2, h4, h5, h6 {
     margin-top: -50px;
     border-radius: 20px;
     color: rgb(48, 48, 48);
-    padding: 4% 0px 30% 4%;
+    padding: 4% 20px 1% 2%;
 }
 
 
@@ -106,6 +124,29 @@ h1,h2, h4, h5, h6 {
 		opacity: 0;
 	}
 }
+
+
+.ck{
+	border-radius: 5px;
+    background-color: #4560E6;
+    color: white;
+    padding: 0px 0px 0px 6px;
+    border: 0;
+    width: 41px;
+    height: 36px;
+}
+
+
+.ck1{
+	border-radius: 5px;
+    background-color: #F2BC18;
+    color: white;
+    padding: 0px 0px 0px 6px;
+    border: 0;
+    width: 54px;
+    height: 36px;
+}
+
 
 .button1 {
 	border-radius:5px;
@@ -146,7 +187,7 @@ h1,h2, h4, h5, h6 {
 	border: 0;
 	font-size: 14px;
 	cursor: pointer;
-	margin: 12% 0% 0% 11%;
+	margin: 12% 0% 0% 0%;
     position: absolute;
 }
 

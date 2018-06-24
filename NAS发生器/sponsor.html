@@ -11,6 +11,10 @@
 	<!-- css -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/sponsor_style.css" rel="stylesheet" />
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/index.js"></script>
+	<script src="./js/nebPay.js"></script>
 </head>
 
 
@@ -47,6 +51,12 @@
 								<a href="sponsor.html">赞助</a>
 							</li>
 							<li>
+									<a href="donate.html">捐助</a>
+								</li>
+							<li>
+									<a href="help.html">帮助</a>
+								</li>
+							<li>
 								<a href="about.html">关于</a>
 							</li>
 
@@ -60,10 +70,14 @@
 
 
 		<!-- 内容区域 -->
-		<section id="content" style="
-		background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1529255624411&di=d9b1f82e06650f851cf055a7bb4dd260&imgtype=0&src=http%3A%2F%2F03.imgmini.eastday.com%2Fmobile%2F20180108%2F20180108185419_6ddb10adae46ddf88913641597d441ec_1.jpeg);
-	">
-			<div class="container">
+		<section id="content" 
+		style="
+		background-image:url(./img/bg.jpg);
+		background-repeat:no-repeat; 
+		background-attachment:fixed;  
+		background-size: 100%;
+		">
+		<div class="container">
 
 
 
@@ -71,17 +85,16 @@
 						<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">赞助</h3>
 						
 						<h4>描述</h4>
-						<input id="" class=dz type="text" value="" placeholder="标题"><br>
+						<input id="name" class=dz type="text" value="" placeholder="标题"><br>
 						<h4>描述</h4>
-						<textarea rows=4 class="dz2">
-							 </textarea>
+						<textarea id="conte" rows=4 class="dz2"></textarea>
 						<h4>图片URL</h4>
-						<input id="" class=dz type="text" value="" placeholder="http://xxx.img/photo.png"><br>
+						<input id="img" class=dz type="text" value="" placeholder="http://xxx.com/photo.png"><br>
 						<h4>链接</h4>
-						<input id="" class=dz type="text" value="" placeholder="http://xxx.com"><br>
+						<input id="url" class=dz type="text" value="" placeholder="http://xxx.com"><br>
 						<h4>赞助金额</h4>
-						<input id="" class=dz1 type="text" value="" placeholder="请输入 > 0.01 的赞助金"><br>
-						<button id="up" class="tj">提交</button>
+						<input id="bal" class=dz1 type="text" value="" placeholder="请输入 > 0.01 的赞助金"><br>
+						<button id="saven" class="tj">提交</button>
 						
 				</div>
 

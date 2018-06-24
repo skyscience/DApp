@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 
 
 <head>
@@ -11,6 +11,12 @@
 	<!-- css -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/index_style.css" rel="stylesheet" />
+	<link rel="import" href="./gpu360/bower_components/iron-ajax/iron-ajax.html">
+
+	<link rel="stylesheet" href="css/ts/demo.css">
+	<link rel="stylesheet" href="css/ts/avgrund.css">
+
+
 	<!-- 圆形图表 -->
 	<link rel="stylesheet" href="css/index_load.css">
 	<script src="./js/jquery.min.js"></script>
@@ -18,12 +24,37 @@
 	<script src="./js/index.js"></script>
 	<script src="./js/nebPay.js"></script>
 
+
+	<!-- 弹窗 -->
+	<link rel="stylesheet" href="css/ts/avgrund.css">
+	<script language="javascript">
+		function openDialog() {
+			Avgrund.show("#default-popup");
+
+		}
+		function closeDialog() {
+			Avgrund.hide();
+		}
+	</script>
+
+
+<script type="text/javascript">
+	//等待页面加载完毕 加载列表
+	// function run() {
+	// 	document.getElementById("all").click();
+	// }
+	window.onload=function(){  
+	    document.getElementById("all").click();
+	}  
+</script>
+
 </head>
 
 
 
 
-<body>
+<body style="background-color: #000000" style="height: 100%;">
+
 	<div id="wrapper">
 
 
@@ -54,6 +85,12 @@
 								<a href="sponsor.html">赞助</a>
 							</li>
 							<li>
+								<a href="donate.html">捐助</a>
+							</li>
+							<li>
+								<a href="help.html">帮助</a>
+							</li>
+							<li>
 								<a href="about.html">关于</a>
 							</li>
 
@@ -67,13 +104,26 @@
 
 
 		<!-- 内容区域 -->
-		<section id="content">
+		<section id="content" style="
+		background-image:url(./img/bg5.jpg);
+		background-repeat:no-repeat; 
+		background-attachment:fixed;  
+		background-size: 100%;
+	">
+			<div id="particles-js" style="width: 1672px;height: 835px;position:  absolute;"></div>
 			<div class="container">
 
 
 				<!-- 数据图表 -->
 				<div class="info">
-						<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">数据</h3>
+
+
+					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">数据</h3>
+
+
+					<button onClick="javascript:openDialog();">点击提示</button>
+
+
 					<div class="circlechart" data-percentage="-20">-20%</div>
 					<div class="circlechart" data-percentage="30">30%</div>
 					<div class="circlechart" data-percentage="85">85%</div>
@@ -82,16 +132,40 @@
 
 
 
+
+				<!-- 提示内容区域 -->
+				<aside id="default-popup" class="avgrund-popup" style="
+				position: absolute;
+				left: 55%;
+				margin-top: -69%;">
+					<h2>弹出提示：</h2>
+					<button onClick="javascript:closeDialog();">Close</button>
+				</aside>
+
+				<!-- 点击空白处关闭弹窗 -->
+				<div class="avgrund-cover"></div>
+
+
+
+
+
 				<div class="lq">
-						<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">领取NAS</h3>
-						<div class="gg">
-								<h3>伊始之地 从此远行 一梦星河</h3>
-								<h3>公告:</h3>
-								<p>构建中。。。</p>
-							</div>
-						<input id="address" class="dz" type="text" value="" placeholder="请输入钱包地址"><br>
-						<button id="up" class="tj">提交</button>
-						
+					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">领取NAS</h3>
+					<div class="gg">
+						<h3>伊始之地 从此远行 一梦星河</h3>
+						<h3>公告:</h3>
+						<p>构建中。。。</p>
+					</div>
+
+
+
+
+
+					<input id="address" class="dz" placeholder="请输入钱包地址">
+					<br>
+					<button id="up" class="tj" >提交</button>
+					
+
 				</div>
 
 
@@ -99,11 +173,27 @@
 
 				<!-- 赞助展示 -->
 				<div class="row1">
-					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">赞助商</h3>
+					<h3 style="color: aliceblue;margin: -1% 0% 3% 1%;">赞助商
+						<a id="all" href="javascript:void(0)">刷新</a> 
+
+						
+						<input id="lqcs" class="lqcs"  value="已领取 0 / 10 次" />
+					</h3>
 					<div class="skill-home">
 						<div class="skill-home-solid clearfix">
 
 
+							<!-- 接收 赞助列表 数据 -->
+							<div id="searchresult">
+									<center style="
+									color: floralwhite;
+									font-size: 20px;
+								">加载中。。。</center>
+							</div>
+
+
+<!-- 
+							下面是 4个不同的展示块
 							<div class="col-md-3 text-center">
 								<span class="icons c1">
 									<i class="fa fa-trophy"></i>
@@ -120,8 +210,8 @@
 									<i class="fa fa-picture-o"></i>
 								</span>
 								<div class="box-area">
-										<h3>test1</h3>
-										<p>more......</p>
+									<h3>test1</h3>
+									<p>more......</p>
 								</div>
 							</div>
 
@@ -131,8 +221,8 @@
 									<i class="fa fa-desktop"></i>
 								</span>
 								<div class="box-area">
-										<h3>test1</h3>
-										<p>more......</p>
+									<h3>test1</h3>
+									<p>more......</p>
 								</div>
 							</div>
 
@@ -142,10 +232,10 @@
 									<i class="fa fa-globe"></i>
 								</span>
 								<div class="box-area">
-										<h3>test1</h3>
-										<p>more......</p>
+									<h3>test1</h3>
+									<p>more......</p>
 								</div>
-							</div>
+							</div> -->
 
 
 						</div>
@@ -172,9 +262,11 @@
 						<!-- 页底 -->
 						<div class="col-lg-6">
 							<div class="copyright">
-								<center><p>
+								<center>
+									<p>
 										Copyright &copy; 2018 Skyscience | Nebulas
-									</p></center>
+									</p>
+								</center>
 							</div>
 						</div>
 
@@ -233,9 +325,22 @@
 	<!-- 圆形图表 -->
 	<script src="js/bootstrap/jquery-1.11.0.min.js" type="text/javascript"></script>
 	<script src="js/index_load.js"></script>
+	<script src="wallet/js/sendNas.js"></script>
+
 	<script>
 		$('.circlechart').circlechart(); // Initialization
 	</script>
+
+
+	<script type="text/javascript" src="js/index_qk/particles.js"></script>
+	<script type="text/javascript" src="js/index_qk/app.js"></script>
+
+
+	<iron-ajax id="ajaxCall" url="[[nasurl]]" method="post" body="[[reqInfo]]" content-type="application/json" handle-as="json"
+	 on-response="_handlerInfo"></iron-ajax>
+	<iron-ajax id="ajaxCallApplication" method="GET" handle-as="text" on-response="_handlerApplication" on-error="on_ajax_err"></iron-ajax>
+	<!-- 提示 -->
+	<script type="text/javascript" src="js/ts_index.js"></script>
 
 </body>
 
